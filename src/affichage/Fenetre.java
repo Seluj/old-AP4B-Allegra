@@ -5,13 +5,13 @@ import java.awt.*;
 
 
 public class Fenetre {
-    int width = 500;
-    int height = 500;
+    int width = 1280;
+    int height = 720;
 
 
     public Fenetre() {
         JFrame frame = new JFrame("A Windows");
-        frame.setSize(1280,720);
+        frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,21 +42,5 @@ public class Fenetre {
 
 
         frame.setVisible(true);
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
     }
 }

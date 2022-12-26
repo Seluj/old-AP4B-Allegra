@@ -9,7 +9,10 @@ public class Pioche {
     private final Carte[] cartes = new Carte[total];
 
     private int index = 0;
-    
+
+    /**
+     * Default constructor create draw pile with random card
+     */
     public Pioche()
     {
         Random rand = new Random();
@@ -55,8 +58,6 @@ public class Pioche {
         }
         return true;
     }
-
-
 
 
     /**

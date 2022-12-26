@@ -1,5 +1,4 @@
-import javax.swing.JFrame;
-import java.util.Random;
+
 import affichage.*;
 
 public class Main {
