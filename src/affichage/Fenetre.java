@@ -4,14 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class Fenetre {
+public class Fenetre implements Base {
     int width = 1280;
     int height = 720;
 
-    JPanel cards; //a panel that uses CardLayout
 
     public Fenetre() {
-        JFrame frame = new JFrame("A Windows");
+        frame.setTitle("Jeu de la vie");
         frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -24,7 +23,7 @@ public class Fenetre {
         frame.getContentPane().add(BorderLayout.NORTH, new MenuBar(frame));
 
 
-        cards = new JPanel(new CardLayout());
+        cards.setLayout(new CardLayout());
         cards.add(jeu, "jeu");
         cards.add(menu, "menu");
         frame.add(BorderLayout.CENTER, cards);
