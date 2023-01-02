@@ -18,19 +18,18 @@ public class Menu extends JPanel implements Base, ActionListener {
 
          setLayout(null);
          name = new JLabel("Name");
-         name.setFont(new Font("Arial", Font.PLAIN, 20));
          name.setSize(100, 20);
          name.setLocation(100, 100);
          add(name);
 
          tname = new JTextField();
-         tname.setFont(new Font("Arial", Font.PLAIN, 15));
          tname.setSize(190, 20);
          tname.setLocation(200, 100);
          add(tname);
 
+
          nbj = new JLabel("Nombre de joueurs");
-         nbj.setSize(100, 20);
+         nbj.setSize(120, 20);
          nbj.setLocation(100, 250);
          add(nbj);
 
@@ -41,14 +40,16 @@ public class Menu extends JPanel implements Base, ActionListener {
 
          sub = new JButton("Submit");
          sub.setSize(100, 20);
-         sub.setLocation(150, 300);
+         sub.setLocation((menuWidth/2)-50, 300);
          sub.addActionListener(this);
          add(sub);
         }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        frame.setSize(1280, 720);
+        // Modify the frame size and location to fit the game
+        frame.setSize(jeuWidth, jeuHeight);
+        frame.setLocationRelativeTo(null);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, "jeu");
     }
