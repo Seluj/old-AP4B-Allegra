@@ -52,4 +52,20 @@ public class Menu extends JPanel implements Base, ActionListener {
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, "jeu");
     }
+
+    public void paintComponent(Graphics g){
+        System.out.println("Je suis exécutée !");
+
+        g.setColor(Color.BLACK);
+        g.drawRect(100,250,120,20);
+        g.drawLine(0, 0, this.getWidth(), this.getHeight());
+        g.drawLine(0, this.getHeight(), this.getWidth(), 0);
+
+        for (int i = 0; i < getWidth(); i+=10) {
+            g.drawLine(i, 0, i, this.getHeight());
+        }
+        for (int i = 0; i < getHeight(); i+=5) {
+            g.drawLine(0, i, this.getWidth(), i);
+        }
+    }
 }
