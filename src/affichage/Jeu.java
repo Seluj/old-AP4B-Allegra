@@ -19,6 +19,7 @@ public class Jeu extends JPanel implements Base, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        frame.setSize(500, 500);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, "menu");
     }
