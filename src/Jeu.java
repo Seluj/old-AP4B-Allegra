@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     MyJLabel bze[][] = new MyJLabel[6][12];
+    JPanel[] panels = new JPanel[24];
 
     public Jeu() {
         setLayout(new GridLayout(5,5));
@@ -14,7 +15,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         frame.setLocationRelativeTo(null);
         setName("jeu");
 
-        JPanel[] panels = new JPanel[24];
         for (int i = 0; i < 24; i++) {
             panels[i] = new JPanel();
 
