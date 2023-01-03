@@ -15,33 +15,33 @@ public class Menu extends JPanel implements Base, ActionListener {
     public Menu() {
         setName("menu");
 
-         setLayout(null);
-         name = new JLabel("Name");
-         name.setSize(100, 20);
-         name.setLocation(100, 100);
-         add(name);
+        setLayout(null);
+        name = new JLabel("Name");
+        name.setSize(100, 20);
+        name.setLocation(100, 100);
+        add(name);
 
-         tname = new JTextField();
-         tname.setSize(190, 20);
-         tname.setLocation(200, 100);
-         add(tname);
+        tname = new JTextField();
+        tname.setSize(190, 20);
+        tname.setLocation(200, 100);
+        add(tname);
 
 
-         nbj = new JLabel("Nombre de joueurs");
-         nbj.setSize(120, 20);
-         nbj.setLocation(100, 250);
-         add(nbj);
+        nbj = new JLabel("Nombre de joueurs");
+        nbj.setSize(120, 20);
+        nbj.setLocation(100, 250);
+        add(nbj);
 
-         nbJoueurs = new JComboBox(nb);
-         nbJoueurs.setSize(50, 20);
-         nbJoueurs.setLocation(220, 250);
-         add(nbJoueurs);
+        nbJoueurs = new JComboBox(nb);
+        nbJoueurs.setSize(50, 20);
+        nbJoueurs.setLocation(220, 250);
+        add(nbJoueurs);
 
-         sub = new JButton("Submit");
-         sub.setSize(100, 20);
-         sub.setLocation((menuWidth/2)-50, 300);
-         sub.addActionListener(this);
-         add(sub);
+        sub = new JButton("Submit");
+        sub.setSize(100, 20);
+        sub.setLocation((menuWidth/2)-50, 300);
+        sub.addActionListener(this);
+        add(sub);
         }
 
     @Override
