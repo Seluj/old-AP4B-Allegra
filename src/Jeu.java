@@ -20,35 +20,31 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
         }
 
-
-        Image image;
-        image = Toolkit.getDefaultToolkit().getImage("src/1.png");
-
         panels[7].setLayout(new GridLayout(3,4, 5, 5));
 
         for (int i = 0; i < 12; i++) {
-            bze[0][i] = new MyJLabel(new ImageIcon(image));
+            bze[0][i] = new MyJLabel();
             bze[0][i].addMouseListener(this);
             panels[7].add(bze[0][i]);
         }
 
         panels[11].setLayout(new GridLayout(3, 4, 5, 5));
         for (int i = 0; i < 12; i++) {
-            bze[1][i] = new MyJLabel(new ImageIcon(image));
+            bze[1][i] = new MyJLabel();
             bze[1][i].addMouseListener(this);
             panels[11].add(bze[1][i]);
         }
 
         panels[13].setLayout(new GridLayout(3, 4, 5, 5));
         for (int i = 0; i < 12; i++) {
-            bze[2][i] = new MyJLabel(new ImageIcon(image));
+            bze[2][i] = new MyJLabel();
             bze[2][i].addMouseListener(this);
             panels[13].add(bze[2][i]);
         }
 
         panels[17].setLayout(new GridLayout(3, 4, 5, 5));
         for (int i = 0; i < 12; i++) {
-            bze[3][i] = new MyJLabel(new ImageIcon(image));
+            bze[3][i] = new MyJLabel();
             bze[3][i].addMouseListener(this);
             panels[17].add(bze[3][i]);
         }
