@@ -1,8 +1,5 @@
 
-public class Plateau {
-
-    private final static int X = 3;
-    private final static int Y = 4;
+public class Plateau implements Base {
 
     private final Carte[][] cartes = new Carte[X][Y];
     private final int[][] cache = new int[X][Y]; // 0 -> hidden / 1 -> revealed / 2 -> no card

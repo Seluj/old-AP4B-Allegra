@@ -9,4 +9,7 @@ public interface Base {
 
     int menuWidth = 300;
     int menuHeight = 500;
+
+    int X = 3;
+    int Y = 4;
 }
