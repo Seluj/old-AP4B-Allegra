@@ -22,6 +22,14 @@ public class Plateau implements Base {
         }
     }
 
+    public int getCache(int x, int y) {
+        return cache[x][y];
+    }
+
+    public int getCartes(int x, int y) {
+        return cartes[x][y].getCredits();
+    }
+
     /**
      * Function used to reveal card [if said card hasn't been revealed or removed yet
      * @param x
@@ -40,7 +48,7 @@ public class Plateau implements Base {
      * @param y
      * @return
      */
-    private boolean isRetourner(int x, int y) {
+    protected boolean isRetourner(int x, int y) {
         return cache[x][y] == 1 || cache[x][y] == 2;
     }
 
