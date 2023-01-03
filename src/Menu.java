@@ -13,6 +13,7 @@ public class Menu extends JPanel implements Base, ActionListener {
     private String nb[]
             = { "2", "3", "4", "5", "6"};
     public Menu() {
+        setName("menu");
 
          setLayout(null);
          name = new JLabel("Name");

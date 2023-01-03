@@ -1,6 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        Fenetre f = new Fenetre();
+
+        Menu menu = new Menu();
+        Jeu jeu = new Jeu();
+
+
+        Fenetre f = new Fenetre(menu, jeu);
         Pioche p = new Pioche();
         System.out.println(p);
         Joueur j1 = new Joueur("Jules", p);

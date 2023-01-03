@@ -12,6 +12,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         setLayout(new GridLayout(5,5));
         frame.setSize(jeuWidth, jeuHeight);
         frame.setLocationRelativeTo(null);
+        setName("jeu");
 
         JPanel[] panels = new JPanel[24];
         for (int i = 0; i < 24; i++) {
