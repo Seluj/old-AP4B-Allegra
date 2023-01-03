@@ -6,24 +6,23 @@ public class Fenetre implements Base {
     int width = 1280;
     int height = 720;
 
-
-    public Fenetre() {
+    /**
+     * Build the window and panels to cardLayout
+     * @param panels the panels to add to the cardLayout. Warning: Panels must have a name
+     */
+    public Fenetre(JPanel... panels) {
         frame.setTitle("Jeu de la vie");
         frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        JPanel menu = new Menu();
-
-
-        JPanel jeu = new Jeu();
 
         frame.getContentPane().add(BorderLayout.NORTH, new MenuBar(frame));
 
-
         cards.setLayout(new CardLayout());
-        cards.add(jeu, "jeu");
-        cards.add(menu, "menu");
+        for (JPanel i : panels) {
+            cards.add(i, i.getName());
+        }
         frame.add(BorderLayout.CENTER, cards);
 
         frame.setVisible(true);
