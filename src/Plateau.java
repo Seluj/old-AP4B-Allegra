@@ -5,17 +5,13 @@ public class Plateau {
     private final static int Y = 4;
 
     private final Carte[][] cartes = new Carte[X][Y];
-    private final boolean[][] cache = new boolean[X][Y];
+    private final int[][] cache = new int[X][Y]; // 0 -> hidden / 1 -> revealed / 2 -> no card
 
     public Plateau() {
-        for (Carte[] c : cartes) {
-            for (Carte c1 : c) {
-                c1 = new Carte();
-            }
-        }
-        for (boolean[] b : cache) {
-            for (boolean b1 : b) {
-                b1 = false;
+        for (int i = 0; i < X; i++) {
+            for (int j = 0; j < Y; j++) {
+                cartes[i][j] = new Carte();
+                cache[i][j] = 0;
             }
         }
     }
@@ -24,13 +20,19 @@ public class Plateau {
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
                 cartes[i][j] = p.piocher_carte();
+                cache[i][j] = 0;
             }
         }
     }
 
+    /**
+     * Function used to reveal card [if said card hasn't been revealed or removed yet
+     * @param x
+     * @param y
+     */
     public void retourner(int x, int y) {
         if (!this.isRetourner(x, y)) {
-            cache[x][y] = true;
+            cache[x][y] = 1;
         }
     }
 
@@ -42,7 +44,27 @@ public class Plateau {
      * @return
      */
     private boolean isRetourner(int x, int y) {
-        return cache[x][y];
+        return cache[x][y] == 1 || cache[x][y] == 2;
+    }
+
+    /**
+     * Function used to determine wether all the player's cards have been revealed or not
+     * @return a boolean 0 -> if they're not all revealed // 1 -> if they are all revealed
+     */
+    public boolean allRetourner(){
+        int i = 0, j = 0;
+        boolean notTurned = false;
+        while (i < X && !notTurned) {
+            i++;
+            while (j < Y && !notTurned){
+                if (cache[i][j] == 0){
+                    notTurned = true;
+                }
+                j++;
+            }
+            j = 0;
+        }
+        return notTurned;
     }
 
     @Override
