@@ -1,15 +1,17 @@
 import javax.swing.*;
 
 public interface Base {
-    JFrame frame = new JFrame();
-    JPanel cards = new JPanel(); //a panel that uses CardLayout
+    // Variables used in the game and accessible from all classes
 
-    int jeuWidth = 1980;
-    int jeuHeight = 1080;
+    JFrame frame = new JFrame();    // The frame of the game
+    JPanel cards = new JPanel();    //a panel that uses CardLayout
 
-    int menuWidth = 300;
-    int menuHeight = 500;
+    int jeuWidth = 1980;            // Width of the game
+    int jeuHeight = 1080;           // Height of the game
 
-    int X = 3;
-    int Y = 4;
+    int menuWidth = 300;            // Width of the menu
+    int menuHeight = 500;           // Height of the menu
+
+    int X = 3;                      // Number of column of the grid for the board
+    int Y = 4;                      // Number of raw of the grid for the board
 }

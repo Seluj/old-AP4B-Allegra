@@ -20,7 +20,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     /**
      * Build the game panel
-     *
      */
     public Jeu() {
         // Set basic information about the panel

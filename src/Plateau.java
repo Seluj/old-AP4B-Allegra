@@ -1,9 +1,13 @@
 
 public class Plateau implements Base {
 
-    private final Carte[][] cartes = new Carte[X][Y];
-    private final int[][] cache = new int[X][Y]; // 0 -> hidden / 1 -> revealed / 2 -> no card
+    // ---------------------- ATTRIBUTES ---------------------- //
+    private final Carte[][] cartes = new Carte[X][Y];   // Array of cards on the board
+    private final int[][] cache = new int[X][Y];        // 0 -> hidden / 1 -> revealed / 2 -> no card
 
+    /**
+     * Default constructor create a board with no card
+     */
     public Plateau() {
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
@@ -13,27 +17,49 @@ public class Plateau implements Base {
         }
     }
 
+    /**
+     * Constructor create a board with the cards passed by parameter
+     * @param p The draw pile to take the cards from
+     */
     public Plateau(Pioche p) {
+
+        // For each card on the board
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
+
+                // Take a card from the draw pile
                 cartes[i][j] = p.piocher_carte();
                 cache[i][j] = 0;
             }
         }
     }
 
+    // Getters
+
+    /**
+     * Access to the state of the card at the position passed by parameter
+     * @param x X position of the card
+     * @param y Y position of the card
+     * @return the state of the card
+     */
     public int getCache(int x, int y) {
         return cache[x][y];
     }
 
+    /**
+     * Access to the card at the position passed by parameter
+     * @param x X position of the card
+     * @param y Y position of the card
+     * @return the card at the position
+     */
     public int getCartes(int x, int y) {
         return cartes[x][y].getCredits();
     }
 
     /**
      * Function used to reveal card [if said card hasn't been revealed or removed yet
-     * @param x
-     * @param y
+     * @param x x coordinate of the card
+     * @param y y coordinate of the card
      */
     public void retourner(int x, int y) {
         if (!this.isRetourner(x, y)) {
@@ -44,16 +70,16 @@ public class Plateau implements Base {
 
     /**
      * EXEPTION A GERER !!!!!!!!!
-     * @param x
-     * @param y
-     * @return
+     * @param x x coordinate of the card
+     * @param y y coordinate of the card
+     * @return true if the card has been revealed
      */
     protected boolean isRetourner(int x, int y) {
         return cache[x][y] == 1 || cache[x][y] == 2;
     }
 
     /**
-     * Function used to determine wether all the player's cards have been revealed or not
+     * Function used to know if all the cards have been revealed or removed
      * @return a boolean 0 -> if they're not all revealed // 1 -> if they are all revealed
      */
     public boolean allRetourner(){
@@ -72,6 +98,11 @@ public class Plateau implements Base {
         return notTurned;
     }
 
+
+    /**
+     * Function used to print the board
+     * @return a string containing the board
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

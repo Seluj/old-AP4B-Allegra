@@ -3,8 +3,6 @@ import java.awt.*;
 
 
 public class Fenetre implements Base {
-    int width = 1280;
-    int height = 720;
 
     /**
      * Build the window and panels to cardLayout
@@ -12,7 +10,6 @@ public class Fenetre implements Base {
      */
     public Fenetre(JPanel... panels) {
         frame.setTitle("Jeu de la vie");
-        frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -3,34 +3,48 @@ import java.util.Random;
 
 public class Pioche {
 
-    private static final int total = 120;
-
-
-    private final Carte[] cartes = new Carte[total];
-
-    private int index = 0;
+    // Attributes
+    private static final int total = 120;               // Total number of cards in the draw pile
+    private final Carte[] cartes = new Carte[total];    // Array of cards in the draw pile
+    private int index = 0;                              // Index of the next card to draw
 
     /**
      * Default constructor create draw pile with random card
      */
-    public Pioche()
-    {
+    public Pioche() {
+        // Create the draw pile with random cards
         Random rand = new Random();
         int randInt, i = index;
         while (i < total) {
+
+            // Take a random number between -1 and 11 included
             randInt = rand.nextInt(-1, 12);
+
+            // Check if the number of cards of this type is correct
             if (check_carte(randInt, i)) {
+
+                // Create the card
                 Carte toInsert = new Carte(randInt);
+
+                // Insert the card in the draw pile
                 cartes[i] = toInsert;
                 i++;
             }
         }
     }
 
-    public Carte piocher_carte()
-    {
+    /**
+     * Draw a card from the draw pile
+     * @return the card drawn
+     */
+    public Carte piocher_carte() {
+        // Take the card at the index
         Carte returned = cartes[index];
+
+        // Increment the index
         index++;
+
+        // Return the card
         return returned;
     }
 
@@ -41,7 +55,12 @@ public class Pioche {
      * @return true if the card can be inserted and false if not
      */
     private boolean check_carte(int carte, int fin) {
+        // Check if the number of cards of this type is correct
+
+        // Count the number of card of this type
         int nb = nb_carte(carte, fin);
+
+        // And check if it's correct
         switch (carte) {
             case -1, 0, 1, 2, 3 -> {
                 if (nb >= 8)
@@ -61,17 +80,21 @@ public class Pioche {
 
 
     /**
-     * Return the number the card in parameter in the draw pile
+     * Count the number of card of the type passed by parameter
      * @param carte card to check into the draw pile
-     * @param fin
+     * @param fin index of the last card in the draw pile
      * @return the number of card
      */
     private int nb_carte(int carte, int fin) {
         int nb = 0;
+
+        // Count the number of card of this type
         for (int i = index; i < fin; i++) {
             if (carte == cartes[i].getCredits())
                 nb++;
         }
+
+        // Return the number of card
         return nb;
     }
 
@@ -80,8 +103,12 @@ public class Pioche {
      * @param entier if true, print all card if not, print all card remaining
      */
     public void printCartes(boolean entier) {
+
+        // Print all card
         if (entier) {
             System.out.print(this);
+
+        // Print all card remaining
         } else {
             StringBuilder str = new StringBuilder();
             str.append('[');
@@ -96,6 +123,11 @@ public class Pioche {
         System.out.println();
     }
 
+
+    /**
+     * Print the draw pile
+     * @return a string with all card in the draw pile
+     */
     @Override
     public String toString() {
         return Arrays.toString(cartes);

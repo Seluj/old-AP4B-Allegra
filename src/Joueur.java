@@ -1,15 +1,17 @@
 public class Joueur {
-    private final String nom;
-    private int score;
-    private final Plateau plateau;
+
+    // Attributes
+    private final String nom;       // Player's name
+    private int score;              // Player's score
+    private final Plateau plateau;  // Player's board
 
     /**
      * Default constructor
      */
     public Joueur() {
-        nom = "Joueur";
-        score = 0;
-        plateau = new Plateau();
+        this.nom = "Joueur";
+        this.score = 0;
+        this.plateau = new Plateau();
     }
 
     /**
@@ -18,8 +20,8 @@ public class Joueur {
      */
     public Joueur(String nom) {
         this.nom = nom;
-        score = 0;
-        plateau = new Plateau();
+        this.score = 0;
+        this.plateau = new Plateau();
     }
 
     /**
@@ -29,13 +31,13 @@ public class Joueur {
      */
     public Joueur(String nom, Pioche p) {
         this.nom = nom;
-        score = 0;
-        plateau = new Plateau(p);
+        this.score = 0;
+        this.plateau = new Plateau(p);
     }
 
 
     /**
-     * Increment score of the player when he win
+     * Increment score of the player when he wins
      */
     public void incrementScore() {
         score++;
