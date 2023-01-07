@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class Controller {
+public class Controller implements Base{
     private int nbJoueurs;
     Menu menu = new Menu();
     Jeu jeu;
@@ -9,30 +10,19 @@ public class Controller {
     Joueur[] listJoueurs;
 
     public Controller() {
-
         System.out.println(p);
-
         // Loop to get the number of players and wait for the game to be ready
         do {
-            // Temporary variable to store the number of players
-            int tmp;
-
-            // Loop until the number of players is valid
-            do {
-                System.out.print("");
-            } while ((tmp = menu.getJoueurs()) == 0);
-
-            // Test if the temporary variable is different to the number of players
-            // then update the number of players and initialize the game
-            if (tmp != nbJoueurs) {
-                nbJoueurs = tmp;
-                init();
-            }
-        } while (!menu.isGameReady());
-
+            System.out.print("");
+        } while ((nbJoueurs = menu.getJoueurs()) == 0);
+        init();
+        //Changes JPanel to "Jeu"
+        CardLayout cl = (CardLayout) (cards.getLayout());
+        cl.show(cards, "jeu");
+        frame.setSize(jeuWidth, jeuHeight);
+        frame.setLocationRelativeTo(null);
         // Print the cards of the players by starting from the first player (player 0)
         printGame(0);
-
     }
 
     private void init(){
@@ -42,7 +32,6 @@ public class Controller {
         for (int i=0; i < nbJoueurs; i++){
             listJoueurs[i] = new Joueur("j"+i,p);
         }
-
         jeu = new Jeu(nbJoueurs);
         f.addPanel(jeu);
     }

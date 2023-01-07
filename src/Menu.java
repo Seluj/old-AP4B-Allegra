@@ -11,9 +11,6 @@ public class Menu extends JPanel implements Base, ActionListener {
     JTextField username = new JTextField();
     private int joueurs;
 
-
-    private boolean gameReady = false;
-
     private String nb[] = { "2", "3", "4", "5", "6"};
 
     public Menu() {
@@ -53,10 +50,6 @@ public class Menu extends JPanel implements Base, ActionListener {
         add(background);
     }
 
-    public boolean isGameReady() {
-        return gameReady;
-    }
-
     public int getJoueurs(){
         return joueurs;
     }
@@ -73,22 +66,8 @@ public class Menu extends JPanel implements Base, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We gather the info regarding the number of players selected
-        if (e.getSource() == generate) {
-            generate.setVisible(false);
-            start.setVisible(true);
-            setNbJoueurs();
+        setNbJoueurs();
 
-            // We keep the menu panel open
-            CardLayout cl = (CardLayout) (cards.getLayout());
-            cl.show(cards, "menu");
-        } else if (e.getSource() == start) {
-            gameReady = true;
-            // We switch to the game panel
-            CardLayout cl = (CardLayout) (cards.getLayout());
-            cl.show(cards, "jeu");
-            frame.setSize(jeuWidth, jeuHeight);
-            frame.setLocationRelativeTo(null);
-        }
     }
 
 
