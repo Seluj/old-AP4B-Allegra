@@ -9,7 +9,7 @@ public class Fenetre implements Base {
      * @param panels the panels to add to the cardLayout. Warning: Panels must have a name
      */
     public Fenetre(JPanel... panels) {
-        frame.setTitle("Jeu de la vie");
+        frame.setTitle("Allegra");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

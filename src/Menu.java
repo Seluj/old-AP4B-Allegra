@@ -10,6 +10,8 @@ public class Menu extends JPanel implements Base, ActionListener {
     private JComboBox nbJoueurs;
     private JButton sub;
 
+    private int joueurs;
+
     private String nb[]
             = { "2", "3", "4", "5", "6"};
     public Menu() {
@@ -44,8 +46,24 @@ public class Menu extends JPanel implements Base, ActionListener {
         add(sub);
         }
 
+    public int getJoueurs(){
+        return joueurs;
+    }
+
+    /**
+     * Function used to return the number of players selected
+      * @return number of players selected
+     */
+    public void setNbJoueurs(){
+        String choixJ = (String)nbJoueurs.getSelectedItem();
+        this.joueurs = Integer.parseInt(choixJ);
+        System.out.println("Nombre de joueurs choisis:"+joueurs);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        // We gather the info regarding the number of players selected
+        setNbJoueurs();
         // Modify the frame size and location to fit the game
         frame.setSize(jeuWidth, jeuHeight);
         frame.setLocationRelativeTo(null);
@@ -54,8 +72,6 @@ public class Menu extends JPanel implements Base, ActionListener {
     }
 
     public void paintComponent(Graphics g){
-        System.out.println("Je suis exécutée !");
-
         g.setColor(Color.BLACK);
         g.drawRect(100,250,120,20);
         g.drawLine(0, 0, this.getWidth(), this.getHeight());
