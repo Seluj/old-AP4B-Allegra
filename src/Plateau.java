@@ -95,7 +95,7 @@ public class Plateau implements Base {
             i++;
             j = 0;
         }
-        return notTurned;
+        return !notTurned;
     }
 
 

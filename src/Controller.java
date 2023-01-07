@@ -19,6 +19,7 @@ public class Controller implements Base{
         do {
             System.out.print("");
         } while ((nbJoueurs = menu.getJoueurs()) == 0);
+        //A DEPLACER!!!! DANS LA BOUCLE CHECKWINNER
         init();
         System.out.println(p);
         //Changes JPanel to "Jeu"
@@ -26,14 +27,41 @@ public class Controller implements Base{
         cl.show(cards, "jeu");
         frame.setSize(jeuWidth, jeuHeight);
         frame.setLocationRelativeTo(null);
-        // Print the cards of the players by starting from the first player (player 0)
-        printGame(0);
+
+        for(int i=0; i<nbJoueurs-1;i++){
+            System.out.println("Score joueur " + i + " = " + listJoueurs[i].roundScore(listJoueurs[i+1]));
+        }
+
+        System.out.println(p);
+        jeu.printDiscardPile(d);
+        jeu.printRevealedDrawPile(p);
+        jeu.printHiddenDrawPile();
+
+        //Loop until the 3 rounds are over
+        for (int i = 0; i < 3; i++){
+            // We start the round so we start with the first player
+            int joueur = 0;
+            //Each players gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
+            while(!listJoueurs[joueur].getPlateau().allRetourner()){
+                printGame(joueur);
+                //
+                //We move on to the next player
+                if(joueur == nbJoueurs-1){
+                    joueur = 0;
+                } else {
+                    joueur++;
+                }
+            }
+           // setScores(joueur);
+        }
     }
 
     /**
      * Function used to initialise the players and the game once the user has selected the number of players
      */
     private void init(){
+        p = new Pioche();
+        d = new Defausse();
         //Allocate list size
         listJoueurs = new Joueur[nbJoueurs];
         //Initialising each player
@@ -50,7 +78,7 @@ public class Controller implements Base{
      */
     private void printGame(int j){
         for (int i=0; i < nbJoueurs; i++) {
-            System.out.println("boucle printGame"+i);
+            //System.out.println("boucle printGame"+i);
             jeu.printCard(this.listJoueurs[j%nbJoueurs].getPlateau(), i);
             j++;
         }
@@ -58,18 +86,10 @@ public class Controller implements Base{
     }
 
     /**
-     * Checks the different players to see if one of them has won three rounds
-     * @return true if a player has won, false if no player has won yet
+     * The user chooses to pick a card from the "Défausse"
      */
-    private boolean checkWinner(){
-        int i = 0;
-        while (i < nbJoueurs && winner == 6){
-            if (listJoueurs[i].getScore() == 3){
-                winner = i;
-            }
-            i++;
-        }
-        return winner != 6;
+    private void actDefausse(){
+
     }
 
     /**
