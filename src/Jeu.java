@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Arrays;
 
 public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     // Variables
@@ -23,16 +22,24 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     // 24 JPanels for game et 1 case for the menu button
     private final JPanel[] panels;
 
-    private int[] playerJPanels;
+    private int[] playerJPanels;    // Table to know which panel is for which player
 
     /**
      * Build the game panel
      */
     public Jeu(int nombreJoueur) {
-        // Number of players
 
+        // Set basic information about the panel
+        setName("jeu");         // Set the name of the panel, it will be used to switch between panels
+
+        // Set Size of the panel and location
+        frame.setSize(jeuWidth, jeuHeight);
+        frame.setLocationRelativeTo(null);
+
+        // Generate the table to store Icon to be displayed of each player
         display_cards = new MyJLabel[nombreJoueur][12];
 
+        // Initialize the column and raw of the grid of the panel
         switch (nombreJoueur) {
             case 2, 3, 4 -> {
                 colonne = 5;
@@ -45,28 +52,20 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             default -> System.out.println("Nombre de joueurs invalide");
         }
 
+        // Initialize the number of panel in the grid minus the menu button
         nbPanel = (colonne * ligne) - 1;
-        System.out.println("Nombre de panel : " + nbPanel);
 
-        System.out.println("Nombre de joueurs choisis dans Jeu : " + nombreJoueur);
-
-        // Set basic information about the panel
-        setName("jeu");         // Set the name of the panel, it will be used to switch between panels
-        
-        // Set basic information about the frame
-        frame.setSize(jeuWidth, jeuHeight);
-        frame.setLocationRelativeTo(null);
-
-
+        // Initialize the table of JPanel and set the layout of the panel to GridLayout
         this.panels = new JPanel[nbPanel];
         setLayout(new GridLayout(ligne, colonne));
 
-        // Initialize the panels
+        // Initialize the panels and set the layout of the panel to GridLayout with 3 raw and 4 column
         for (int i = 0; i < nbPanel; i++) {
             this.panels[i] = new JPanel();
             this.panels[i].setLayout(new GridLayout(3,4));
         }
 
+        // Initialize the table to know which panel is for which player with a given number of player
         switch (nombreJoueur) {
             case 2 -> deuxJoueurs();
             case 3 -> troisJoueurs();
@@ -76,6 +75,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             default -> System.out.println("Nombre de joueur invalide");
         }
 
+        // Then initialize all cards panel of each player
         initPanel();
 
         // Add the panels to the grid
@@ -91,6 +91,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
     private void initPanel() {
+        // For each player and each card of the player initialize the display of the card, add it to the panel and set the listener
         for (int i = 0; i < playerJPanels.length; i++) {
             for (int j = 0; j < 12; j++) {
                 display_cards[i][j] = new MyJLabel();
@@ -100,44 +101,59 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Initialize the table to know which panel is for which player with 2 players
+     */
     private void deuxJoueurs() {
         playerJPanels = new int[2];
-        playerJPanels[0] = 17;
-        playerJPanels[1] = 7;
+        playerJPanels[0] = 17;      // Player 1
+        playerJPanels[1] = 7;       // Player 2
     }
 
+    /**
+     * Initialize the table to know which panel is for which player with 3 players
+     */
     private void troisJoueurs() {
         playerJPanels = new int[3];
-        playerJPanels[0] = 17;
-        playerJPanels[1] = 6;
-        playerJPanels[2] = 8;
+        playerJPanels[0] = 17;      // Player 1
+        playerJPanels[1] = 6;       // Player 2
+        playerJPanels[2] = 8;       // Player 3
     }
 
+    /**
+     * Initialize the table to know which panel is for which player with 4 players
+     */
     private void quatreJoueurs() {
         playerJPanels = new int[4];
-        playerJPanels[0] = 17;
-        playerJPanels[1] = 11;
-        playerJPanels[2] = 7;
-        playerJPanels[3] = 13;
+        playerJPanels[0] = 17;      // Player 1
+        playerJPanels[1] = 11;      // Player 2
+        playerJPanels[2] = 7;       // Player 3
+        playerJPanels[3] = 13;      // Player 4
     }
 
+    /**
+     * Initialize the table to know which panel is for which player with 5 players
+     */
     private void cinqJoueurs() {
         playerJPanels = new int[5];
-        playerJPanels[0] = 25;
-        playerJPanels[1] = 23;
-        playerJPanels[2] = 8;
-        playerJPanels[3] = 10;
-        playerJPanels[4] = 12;
+        playerJPanels[0] = 25;      // Player 1
+        playerJPanels[1] = 23;      // Player 2
+        playerJPanels[2] = 8;       // Player 3
+        playerJPanels[3] = 10;      // Player 4
+        playerJPanels[4] = 12;      // Player 5
     }
 
+    /**
+     * Initialize the table to know which panel is for which player with 6 players
+     */
     private void sixJoueurs() {
         playerJPanels = new int[6];
-        playerJPanels[0] = 24;
-        playerJPanels[1] = 22;
-        playerJPanels[2] = 8;
-        playerJPanels[3] = 10;
-        playerJPanels[4] = 12;
-        playerJPanels[5] = 26;
+        playerJPanels[0] = 24;      // Player 1
+        playerJPanels[1] = 22;      // Player 2
+        playerJPanels[2] = 8;       // Player 3
+        playerJPanels[3] = 10;      // Player 4
+        playerJPanels[4] = 12;      // Player 5
+        playerJPanels[5] = 26;      // Player 6
     }
 
 
@@ -148,6 +164,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
      */
     public int[] toTable(int y) {
         int[] tab = new int[2];
+
         for (int i = 0; i < y; i++) {
             tab[1] ++;
             if (tab[1] == Y) {
@@ -155,6 +172,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
                 tab[0] ++;
             }
         }
+
         return tab;
     }
 
@@ -178,13 +196,20 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     public void printCard(Plateau p, int joueur) {
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
+                // If the card is hidden display the back of the card
                 if (p.getCache(i, j) == 0) {
                     display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\back.png"));
+
+                // If the card is visible display the front of the card
                 } else if (p.getCache(i, j) == 1) {
                     display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src/images/" + p.getCartes(i, j) + ".png"));
+
+                // If the card is removed display a blank card
                 } else {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\back.png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\blank.png"));
                 }
+
+                // Then display the card
                 display_cards[joueur][toInterface(i, j)].paintComponent(display_cards[joueur][toInterface(i, j)].getGraphics());
             }
         }
@@ -240,11 +265,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     static class MyJLabel extends JLabel
     {
         ImageIcon imageIcon;
-        public MyJLabel(ImageIcon icon)
-        {
-            super();
-            this.imageIcon = icon;
-        }
 
         public MyJLabel()
         {
