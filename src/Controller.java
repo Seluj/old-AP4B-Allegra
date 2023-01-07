@@ -8,6 +8,11 @@ public class Controller implements Base{
     Fenetre f = new Fenetre(menu);
     Pioche p = new Pioche();
     Joueur[] listJoueurs;
+    //Int to keep track of if a player has turned all of his cards, therefore initialising the last round
+    int cartesRet = 6; //we initialise on 6 because the last player number is 5
+    //Int indicating the winner of the game [you must win 3 rounds to win the game]
+    int winner = 6; //we initialise on 6 because the last player number is 5
+
 
     public Controller() {
         System.out.println(p);
@@ -25,6 +30,9 @@ public class Controller implements Base{
         printGame(0);
     }
 
+    /**
+     * Function used to initialise the players and the game once the user has selected the number of players
+     */
     private void init(){
         //Allocate list size
         listJoueurs = new Joueur[nbJoueurs];
@@ -48,5 +56,21 @@ public class Controller implements Base{
         }
         jeu.revalidate();
     }
+
+    /**
+     * Checks the different players to see if one of them has won three rounds
+     * @return true if a player has won, false if no player has won yet
+     */
+    private boolean checkWinner(){
+        int i = 0;
+        while (i < nbJoueurs && winner == 6){
+            if (listJoueurs[i].getScore() == 3){
+                winner = i;
+            }
+            i++;
+        }
+        return winner != 6;
+    }
+
 
 }

@@ -2,7 +2,7 @@ public class Joueur {
 
     // Attributes
     private final String nom;       // Player's name
-    private int score;              // Player's score
+    private int score;              // Player's score [number of rounds won]
     private final Plateau plateau;  // Player's board
 
     /**
