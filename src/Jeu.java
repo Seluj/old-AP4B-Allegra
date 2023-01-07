@@ -136,8 +136,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Modify the frame size and location to fit the menu
-        frame.setSize(menuWidth, menuHeight);
-        frame.setLocationRelativeTo(null);
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, "menu");
     }
@@ -207,5 +205,10 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             if (this.imageIcon != null)
                 g.drawImage(imageIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
+    }
+
+    public void paintComponent(Graphics g) {
+        frame.setSize(jeuWidth, jeuHeight);
+        frame.setLocationRelativeTo(null);
     }
 }

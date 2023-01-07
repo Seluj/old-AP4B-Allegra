@@ -3,8 +3,6 @@ public class Main {
 
         Menu menu = new Menu();
         Jeu jeu = new Jeu();
-        LoginJFrame login = new LoginJFrame();
-
 
         Fenetre f = new Fenetre(menu, jeu);
         Pioche p = new Pioche();
@@ -12,6 +10,5 @@ public class Main {
         Joueur j1 = new Joueur("Jules", p);
         jeu.printCard(j1.getPlateau(), 0);
         jeu.revalidate();
-
     }
 }
