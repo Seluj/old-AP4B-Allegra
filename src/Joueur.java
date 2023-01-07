@@ -35,6 +35,37 @@ public class Joueur {
         this.plateau = new Plateau(p);
     }
 
+    /**
+     * Calculates the score of the player for that round
+     * @param joueur_suivant We also need the player on the left's cards
+     * @return the total score of the player
+     */
+    public int roundScore(Joueur joueur_suivant) {
+        int score = 0;
+
+        for (int i = 0; i < 3; i++) {
+            if(joueur_suivant.plateau.getCache(i,3) != 2){
+                score += joueur_suivant.plateau.getCartes(i, 3);
+            }
+
+            for (int j = 0; j < 4; j++) {
+                if(plateau.getCache(i,j) != 2){
+                    score += plateau.getCartes(i,j);
+                }
+            }
+        }
+        return score;
+    }
+
+    /**
+     * Checks if there are three alligned identical cards, if it is the case they are removed from the player's "plateau"
+     */
+    public void cartesAllign() {
+        for (int i =0; i < 4; i++){
+            plateau.getCartes(i,2);
+        }
+
+    }
 
     /**
      * Increment score of the player when he wins

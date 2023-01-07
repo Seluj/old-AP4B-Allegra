@@ -5,60 +5,45 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JPanel implements Base, ActionListener {
 
-    private JComboBox nbJoueurs;
-    private JButton start;
-    private JButton generate;
-    JTextField username = new JTextField();
+    private JComboBox comboBoxNombreJoueurs;
+    private JButton buttonStart;
     private int joueurs;
-
-    private String nb[] = { "2", "3", "4", "5", "6"};
 
     public Menu() {
         setName("menu");
         setSize(menuWidth, menuHeight);
+        frame.setLocationRelativeTo(null);
         setLayout(null);
 
-        JLabel usernameText = new JLabel(new ImageIcon("src\\Images\\login\\username.png"));
-        usernameText.setBounds(50, 135, 100, 23);
-        add(usernameText);
-        this.username.setBounds(200, 134, 150, 32);
-        add(this.username);
+        JLabel labelNombreJoueur = new JLabel(new ImageIcon("src\\Images\\login\\nb_joueur.png"));
+        labelNombreJoueur.setBounds(50, 195, 100, 28);
+        add(labelNombreJoueur);
 
-        JLabel passwordText = new JLabel(new ImageIcon("src\\Images\\login\\nb_joueur.png"));
-        passwordText.setBounds(50, 195, 100, 28);
-        add(passwordText);
+        String[] numberPossible = {"2", "3", "4", "5", "6"};
+        comboBoxNombreJoueurs = new JComboBox(numberPossible);
+        comboBoxNombreJoueurs.setBounds(200, 195, 150, 32);
+        add(comboBoxNombreJoueurs);
 
-        nbJoueurs = new JComboBox(nb);
-        nbJoueurs.setBounds(200, 195, 150, 32);
-        add(nbJoueurs);
+        buttonStart = new JButton("Commencer");
+        buttonStart.setSize(100, 32);
+        buttonStart.setLocation((menuWidth/2)-50, 250);
+        buttonStart.addActionListener(this);
+        add(buttonStart);
 
-        generate = new JButton("Générer");
-        generate.setSize(100, 32);
-        generate.setLocation((menuWidth/2)-50, 250);
-        generate.addActionListener(this);
-        add(generate);
-
-        start = new JButton("Commencer");
-        start.setSize(150, 32);
-        start.setLocation((menuWidth/2)-(150/2), 300);
-        start.setVisible(false);
-        start.addActionListener(this);
-        add(start);
-
-        JLabel background = new JLabel(new ImageIcon("src\\Images\\login\\backgroun.jpg"));
-        background.setBounds(0, 0, 400, 514);
-        add(background);
+        JLabel labelBackground = new JLabel(new ImageIcon("src\\Images\\login\\backgroun.jpg"));
+        labelBackground.setBounds(0, 0, 400, 514);
+        add(labelBackground);
     }
 
     public int getJoueurs(){
         return joueurs;
     }
+
     /**
-     * Function used to return the number of players selected
-     * @return number of players selected
+     * Function used to set the number of players selected
      */
     public void setNbJoueurs(){
-        String choixJ = (String)nbJoueurs.getSelectedItem();
+        String choixJ = (String)comboBoxNombreJoueurs.getSelectedItem();
         this.joueurs = Integer.parseInt(choixJ);
         System.out.println("Nombre de joueurs choisis:"+joueurs);
     }
@@ -66,11 +51,7 @@ public class Menu extends JPanel implements Base, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We gather the info regarding the number of players selected
+        setSize(menuWidth, menuHeight);
         setNbJoueurs();
-
-    }
-
-
-    public void paintComponent(Graphics g) {
     }
 }

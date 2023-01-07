@@ -86,13 +86,13 @@ public class Plateau implements Base {
         int i = 0, j = 0;
         boolean notTurned = false;
         while (i < X && !notTurned) {
-            i++;
             while (j < Y && !notTurned){
                 if (cache[i][j] == 0){
                     notTurned = true;
                 }
                 j++;
             }
+            i++;
             j = 0;
         }
         return notTurned;

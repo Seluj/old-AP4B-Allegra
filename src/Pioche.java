@@ -48,6 +48,10 @@ public class Pioche {
         return returned;
     }
 
+    public Carte getFirstCard() {
+        return cartes[index];
+    }
+
     /**
      * Check if there are enought card of the card passed by parameter
      * @param carte the card to check

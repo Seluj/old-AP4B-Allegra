@@ -3,6 +3,12 @@ public class Defausse {
     // Attributes
     private Carte defausse = new Carte();
 
+
+    // Constructor
+    public Defausse() {
+        this.defausse = new Carte();
+    }
+
     // Getters and setters
 
     // Get the card on the discard pile
