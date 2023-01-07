@@ -4,37 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JPanel implements Base, ActionListener {
-    private JLabel name;
-    private JTextField tname;
-    private JLabel nbj;
+
     private JComboBox nbJoueurs;
     private JButton sub;
+    JTextField username = new JTextField();
 
-    private String nb[]
-            = { "2", "3", "4", "5", "6"};
+    private String nb[] = { "2", "3", "4", "5", "6"};
     public Menu() {
         setName("menu");
-
         setLayout(null);
-        name = new JLabel("Name");
-        name.setSize(100, 20);
-        name.setLocation(100, 100);
-        add(name);
 
-        tname = new JTextField();
-        tname.setSize(190, 20);
-        tname.setLocation(200, 100);
-        add(tname);
+        JLabel usernameText = new JLabel(new ImageIcon("src\\Images\\login\\username.png"));
+        usernameText.setBounds(50, 135, 100, 23);
+        add(usernameText);
+        this.username.setBounds(200, 134, 150, 32);
+        add(this.username);
 
-
-        nbj = new JLabel("Nombre de joueurs");
-        nbj.setSize(120, 20);
-        nbj.setLocation(100, 250);
-        add(nbj);
+        JLabel passwordText = new JLabel(new ImageIcon("src\\Images\\login\\nb_joueur.png"));
+        passwordText.setBounds(50, 195, 100, 28);
+        add(passwordText);
 
         nbJoueurs = new JComboBox(nb);
-        nbJoueurs.setSize(50, 20);
-        nbJoueurs.setLocation(220, 250);
+        nbJoueurs.setBounds(200, 195, 150, 32);
         add(nbJoueurs);
 
         sub = new JButton("Submit");
@@ -42,6 +33,9 @@ public class Menu extends JPanel implements Base, ActionListener {
         sub.setLocation((menuWidth/2)-50, 300);
         sub.addActionListener(this);
         add(sub);
+        JLabel background = new JLabel(new ImageIcon("src\\Images\\login\\backgroun.jpg"));
+        background.setBounds(0, 0, 400, 514);
+        add(background);
         }
 
     @Override
