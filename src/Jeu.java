@@ -10,7 +10,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     private int colonne;    // Column of the grid
     private int ligne;      // Raw of the grid
-    private int nbPanel;    // Number of panel in the grid²
+    private int nbPanel;    // Number of panel in the grid
 
     // Tableau de cartes
     // 12 cartes par joueur
