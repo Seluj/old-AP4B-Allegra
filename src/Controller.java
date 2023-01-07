@@ -97,48 +97,47 @@ public class Controller implements Base{
      */
     private int playerLowestScore(){
         int joueur_min = 0, score;
-        boolean equal = false;
 
         for(int i=0; i<nbJoueurs-1; i++){
             score = listJoueurs[i].roundScore(listJoueurs[i+1]);
 
             if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) < score) {
                 joueur_min = i;
-            }else if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) == score){
-                equal = true;
             }
         }
         score = listJoueurs[nbJoueurs-1].roundScore(listJoueurs[0]);
 
         if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) < score) {
             joueur_min = nbJoueurs-1;
-        }else if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) == score){
-            equal = true;
         }
 
         System.out.println("Le gagnant de la manche est : " + listJoueurs[joueur_min]);
-        if(equal){
-            joueur_min+=100;
-        }
+
         return joueur_min;
     }
+    private boolean shareLowestScore(){
+        int playerScoreMin = playerLowestScore();
+        int scoreMin = listJoueurs[playerScoreMin].getScore();
 
+        for(int i=0; i<nbJoueurs; i++){
+            if((listJoueurs[i].getScore() == scoreMin) && (playerScoreMin != i)){
+                return true;
+            }
+        }
+        return false;
+    }
     private void setScores(int joueurFirstFinish){
         int playerScoreMin = playerLowestScore();
 
-        if(playerScoreMin >= 100){
-            listJoueurs[joueurFirstFinish].setScore(2*listJoueurs[joueurFirstFinish].getScore());
-        }else{
-
-            for(int i=0; i<nbJoueurs-1; i++){
-                listJoueurs[i].setScore(listJoueurs[i].roundScore(listJoueurs[i+1]));
-            }
-            listJoueurs[nbJoueurs-1].setScore(listJoueurs[nbJoueurs-1].roundScore(listJoueurs[0]));
-
-            if(playerScoreMin != joueurFirstFinish){
-                listJoueurs[joueurFirstFinish].setScore(2*listJoueurs[joueurFirstFinish].getScore());
-            }
+        for(int i=0; i<nbJoueurs-1; i++){
+            listJoueurs[i].setScore(listJoueurs[i].roundScore(listJoueurs[i+1]));
         }
+        listJoueurs[nbJoueurs-1].setScore(listJoueurs[nbJoueurs-1].roundScore(listJoueurs[0]));
+
+        if(playerScoreMin != joueurFirstFinish || shareLowestScore()){
+            listJoueurs[joueurFirstFinish].setScore(2*listJoueurs[joueurFirstFinish].getScore());
+        }
+
     }
 
 }
