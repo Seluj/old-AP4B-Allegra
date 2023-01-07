@@ -70,8 +70,8 @@ public class Joueur {
     /**
      * Increment score of the player when he wins
      */
-    public void incrementScore() {
-        score++;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     // ---------------------- ACCESS Function ---------------------- //
