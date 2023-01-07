@@ -6,14 +6,19 @@ import java.awt.event.ActionListener;
 public class Menu extends JPanel implements Base, ActionListener {
 
     private JComboBox nbJoueurs;
-    private JButton sub;
+    private JButton start;
+    private JButton generate;
     JTextField username = new JTextField();
     private int joueurs;
+
+
+    private boolean gameReady = false;
 
     private String nb[] = { "2", "3", "4", "5", "6"};
 
     public Menu() {
         setName("menu");
+        setSize(menuWidth, menuHeight);
         setLayout(null);
 
         JLabel usernameText = new JLabel(new ImageIcon("src\\Images\\login\\username.png"));
@@ -30,16 +35,27 @@ public class Menu extends JPanel implements Base, ActionListener {
         nbJoueurs.setBounds(200, 195, 150, 32);
         add(nbJoueurs);
 
-        sub = new JButton("Submit");
-        sub.setSize(100, 20);
-        sub.setLocation((menuWidth/2)-50, 300);
-        sub.addActionListener(this);
-        add(sub);
+        generate = new JButton("Générer");
+        generate.setSize(100, 32);
+        generate.setLocation((menuWidth/2)-50, 250);
+        generate.addActionListener(this);
+        add(generate);
+
+        start = new JButton("Commencer");
+        start.setSize(150, 32);
+        start.setLocation((menuWidth/2)-(150/2), 300);
+        start.setVisible(false);
+        start.addActionListener(this);
+        add(start);
+
         JLabel background = new JLabel(new ImageIcon("src\\Images\\login\\backgroun.jpg"));
         background.setBounds(0, 0, 400, 514);
         add(background);
     }
 
+    public boolean isGameReady() {
+        return gameReady;
+    }
 
     public int getJoueurs(){
         return joueurs;
@@ -57,15 +73,25 @@ public class Menu extends JPanel implements Base, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // We gather the info regarding the number of players selected
-        setNbJoueurs();
-        // Modify the frame size and location to fit the game
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        cl.show(cards, "jeu");
+        if (e.getSource() == generate) {
+            generate.setVisible(false);
+            start.setVisible(true);
+            setNbJoueurs();
+
+            // We keep the menu panel open
+            CardLayout cl = (CardLayout) (cards.getLayout());
+            cl.show(cards, "menu");
+        } else if (e.getSource() == start) {
+            gameReady = true;
+            // We switch to the game panel
+            CardLayout cl = (CardLayout) (cards.getLayout());
+            cl.show(cards, "jeu");
+            frame.setSize(jeuWidth, jeuHeight);
+            frame.setLocationRelativeTo(null);
+        }
     }
 
 
     public void paintComponent(Graphics g) {
-        frame.setSize(menuWidth, menuHeight);
-        frame.setLocationRelativeTo(null);
     }
 }

@@ -13,6 +13,7 @@ public class Fenetre implements Base {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(menuWidth, menuHeight);
 
         frame.getContentPane().add(BorderLayout.NORTH, new MenuBar(frame));
 
@@ -23,5 +24,9 @@ public class Fenetre implements Base {
         frame.add(BorderLayout.CENTER, cards);
 
         frame.setVisible(true);
+    }
+
+    public void addPanel(JPanel panel) {
+        cards.add(panel, panel.getName());
     }
 }

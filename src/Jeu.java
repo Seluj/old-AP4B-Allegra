@@ -4,75 +4,82 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     // Variables
 
+    private int colonne;    // Column of the grid
+    private int ligne;      // Raw of the grid
+    private int nbPanel;    // Number of panel in the grid²
+
     // Tableau de cartes
     // 12 cartes par joueur
     // 6 joueurs
-    MyJLabel[][] display_cards = new MyJLabel[6][12];
+    private MyJLabel[][] display_cards;
 
     // Table of JPanel to fil the grid.
     // The grid is 5 raw and 5 column.
     // 24 JPanels for game et 1 case for the menu button
-    JPanel[] panels = new JPanel[24];
+    private final JPanel[] panels;
+
+    private int[] playerJPanels;
 
     /**
      * Build the game panel
      */
-    public Jeu() {
+    public Jeu(int nombreJoueur) {
+        // Number of players
+
+        display_cards = new MyJLabel[nombreJoueur][12];
+
+        switch (nombreJoueur) {
+            case 2, 3, 4 -> {
+                colonne = 5;
+                ligne = 5;
+            }
+            case 5, 6 -> {
+                colonne = 7;
+                ligne = 5;
+            }
+            default -> System.out.println("Nombre de joueurs invalide");
+        }
+
+        nbPanel = (colonne * ligne) - 1;
+        System.out.println("Nombre de panel : " + nbPanel);
+
+        System.out.println("Nombre de joueurs choisis dans Jeu : " + nombreJoueur);
+
         // Set basic information about the panel
-        setLayout(new GridLayout(5,5));
         setName("jeu");         // Set the name of the panel, it will be used to switch between panels
         
         // Set basic information about the frame
         frame.setSize(jeuWidth, jeuHeight);
         frame.setLocationRelativeTo(null);
-        
+
+
+        this.panels = new JPanel[nbPanel];
+        setLayout(new GridLayout(ligne, colonne));
+
         // Initialize the panels
-        for (int i = 0; i < 24; i++) {
-            panels[i] = new JPanel();
+        for (int i = 0; i < nbPanel; i++) {
+            this.panels[i] = new JPanel();
+            this.panels[i].setLayout(new GridLayout(3,4));
         }
 
-        // Panels 7, 11, 13 and 17 are for the cards of players.
-        // So we set those panels to display the cards with GridLayout and adding listener to the panels of cards
-
-        panels[7].setLayout(new GridLayout(3,4, 5, 5));
-
-        for (int i = 0; i < 12; i++) {
-            // Initialize all JLabels
-            display_cards[0][i] = new MyJLabel();
-            // Add a listener to the JLabel
-            display_cards[0][i].addMouseListener(this);
-            // And add the JLabel to the panel
-            panels[7].add(display_cards[0][i]);
+        switch (nombreJoueur) {
+            case 2 -> deuxJoueurs();
+            case 3 -> troisJoueurs();
+            case 4 -> quatreJoueurs();
+            case 5 -> cinqJoueurs();
+            case 6 -> sixJoueurs();
+            default -> System.out.println("Nombre de joueur invalide");
         }
 
-        // Same for the other panels
-        panels[11].setLayout(new GridLayout(3, 4, 5, 5));
-        for (int i = 0; i < 12; i++) {
-            display_cards[1][i] = new MyJLabel();
-            display_cards[1][i].addMouseListener(this);
-            panels[11].add(display_cards[1][i]);
-        }
-
-        panels[13].setLayout(new GridLayout(3, 4, 5, 5));
-        for (int i = 0; i < 12; i++) {
-            display_cards[2][i] = new MyJLabel();
-            display_cards[2][i].addMouseListener(this);
-            panels[13].add(display_cards[2][i]);
-        }
-
-        panels[17].setLayout(new GridLayout(3, 4, 5, 5));
-        for (int i = 0; i < 12; i++) {
-            display_cards[3][i] = new MyJLabel();
-            display_cards[3][i].addMouseListener(this);
-            panels[17].add(display_cards[3][i]);
-        }
+        initPanel();
 
         // Add the panels to the grid
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < nbPanel; i++) {
             add(panels[i]);
         }
 
@@ -80,7 +87,57 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         JButton b = new JButton("menu");
         b.addActionListener(this);
         add(b);
+        revalidate();
+    }
 
+    private void initPanel() {
+        for (int i = 0; i < playerJPanels.length; i++) {
+            for (int j = 0; j < 12; j++) {
+                display_cards[i][j] = new MyJLabel();
+                display_cards[i][j].addMouseListener(this);
+                panels[playerJPanels[i]].add(display_cards[i][j]);
+            }
+        }
+    }
+
+    private void deuxJoueurs() {
+        playerJPanels = new int[2];
+        playerJPanels[0] = 17;
+        playerJPanels[1] = 7;
+    }
+
+    private void troisJoueurs() {
+        playerJPanels = new int[3];
+        playerJPanels[0] = 17;
+        playerJPanels[1] = 6;
+        playerJPanels[2] = 8;
+    }
+
+    private void quatreJoueurs() {
+        playerJPanels = new int[4];
+        playerJPanels[0] = 17;
+        playerJPanels[1] = 11;
+        playerJPanels[2] = 7;
+        playerJPanels[3] = 13;
+    }
+
+    private void cinqJoueurs() {
+        playerJPanels = new int[5];
+        playerJPanels[0] = 25;
+        playerJPanels[1] = 23;
+        playerJPanels[2] = 8;
+        playerJPanels[3] = 10;
+        playerJPanels[4] = 12;
+    }
+
+    private void sixJoueurs() {
+        playerJPanels = new int[6];
+        playerJPanels[0] = 24;
+        playerJPanels[1] = 22;
+        playerJPanels[2] = 8;
+        playerJPanels[3] = 10;
+        playerJPanels[4] = 12;
+        playerJPanels[5] = 26;
     }
 
 
@@ -122,11 +179,11 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
                 if (p.getCache(i, j) == 0) {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src/images/back.png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\back.png"));
                 } else if (p.getCache(i, j) == 1) {
                     display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src/images/" + p.getCartes(i, j) + ".png"));
                 } else {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src/images/back.png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\back.png"));
                 }
                 display_cards[joueur][toInterface(i, j)].paintComponent(display_cards[joueur][toInterface(i, j)].getGraphics());
             }
@@ -138,6 +195,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         // Modify the frame size and location to fit the menu
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, "menu");
+        frame.setLocationRelativeTo(null);
     }
 
     @Override
@@ -209,6 +267,5 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     public void paintComponent(Graphics g) {
         frame.setSize(jeuWidth, jeuHeight);
-        frame.setLocationRelativeTo(null);
     }
 }
