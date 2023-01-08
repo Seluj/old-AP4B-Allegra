@@ -407,11 +407,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
     public void printDialog(String message) {
-        /*
-        JFrame jFrame = new JFrame();
-        JOptionPane.showMessageDialog(jFrame, message);
-
-         */
         messageBox.setText(message);
         panels[messagePanel].validate();
     }
@@ -427,23 +422,23 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         frame.setLocationRelativeTo(null);
     }
 
+    // Click check in the JPanel
+    // The manipulation will always start with a click on the draw pile or on the discard pile
+    // And it will always end with a click on the player's cards
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("click");
-        if (e.getSource() != hiddenDrawPile && e.getSource() != discardPile && e.getSource() != revealedDrawPile) {
+
+        // If the player clicks on his board we check which card he clicked on
+        if (e.getSource() != hiddenDrawPile && e.getSource() != discardPile) {
             if (action == 1 || action == 2 || action == 3) {
                 for (int j = 0; j < display_cards[0].length; j++) {
                     if (e.getSource() == display_cards[0][j]) {
-                        System.out.println("i = " + 0 + " j = " + j + " clicked");
-                        System.out.println("X = " + toTable(j)[0] + " Y = " + toTable(j)[1]);
                         playerCard = true;
                         setCardSelected(toTable(j));
                     }
                 }
                 for (int i = 0; i < display_cards[1].length; i++) {
                     if (e.getSource() == display_cards[1][i]) {
-                        System.out.println("i = " + 1 + " j = " + i + " clicked");
-                        System.out.println("X = " + toTable(i)[0] + " Y = " + toTable(i)[1]);
                         if (i == 3 || i == 7 || i == 11) {
                             playerCard = false;
                             setCardSelected(toTable(i));
@@ -451,17 +446,27 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
                     }
                 }
             }
+
+        // If the player clicks on the draw pile we just send message and set the action
         } else if (e.getSource() == hiddenDrawPile) {
+
+            // Set the action to 1
             setAction(1);
-            System.out.println("draw pile clicked");
+
+            // Display information about the action
             printDialog("Veuillez cliquer sur une de vos cartes pour l'échanger ou sur la défausse pour la défausser");
+
+            // Display the drawn card
             printRevealedDrawPile();
+
+        // If the player clicks on the discard pile we check if he can draw a card
         } else if (e.getSource() == discardPile) {
+
+            // If the player click on the discard Pile after clicking on the draw pile we wait that he select a card in his board
             if (action == 1) {
-                printDialog("Veuillez cliquer sur une de vos cartes pour la retourner");
                 setAction(3);
+                printDialog("Veuillez cliquer sur une de vos cartes pour la retourner");
             } else if (action == 0 && d.getDefausse().getCredits() != -2) {
-                System.out.println("discard pile clicked");
                 setAction(2);
                 printDialog("Veuillez cliquer sur une de vos cartes à échanger");
             }
