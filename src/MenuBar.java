@@ -2,7 +2,10 @@ import javax.swing.*;
 
 public class MenuBar extends JMenuBar {
 
-    // Constructor
+    // ---------------------- ATTRIBUTES ---------------------- //
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
 
     public MenuBar(JFrame frame) {
         // Create the menu bar

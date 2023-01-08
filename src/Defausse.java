@@ -1,15 +1,18 @@
 public class Defausse {
 
-    // Attributes
+    // ---------------------- ATTRIBUTES ---------------------- //
+
     private Carte defausse = new Carte();
 
 
-    // Constructor
+    // ---------------------- CONSTRUCTOR ---------------------- //
+
     public Defausse() {
         this.defausse = new Carte();
     }
 
-    // Getters and setters
+
+    // ---------------------- ACCESS Function ---------------------- //
 
     // Get the card on the discard pile
     public Carte getDefausse() {

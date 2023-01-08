@@ -5,6 +5,9 @@ public class Plateau implements Base {
     private final Carte[][] cartes = new Carte[X][Y];   // Array of cards on the board
     private final int[][] cache = new int[X][Y];        // 0 -> hidden / 1 -> revealed / 2 -> no card
 
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
+
     /**
      * Constructor create a board with the cards passed by parameter
      * @param p The draw pile to take the cards from
@@ -22,7 +25,7 @@ public class Plateau implements Base {
         }
     }
 
-    // Getters
+    // ---------------------- ACCESS Function ---------------------- //
 
     /**
      * Access to the state of the card at the position passed by parameter
@@ -43,6 +46,9 @@ public class Plateau implements Base {
     public int getCartes(int x, int y) {
         return cartes[x][y].getCredits();
     }
+
+
+    // ---------------------- OTHER Function ---------------------- //
 
     /**
      * Function used to reveal card [if said card hasn't been revealed or removed yet
@@ -86,6 +92,8 @@ public class Plateau implements Base {
         return !notTurned;
     }
 
+
+    // ---------------------- OVERRIDE Function ---------------------- //
 
     /**
      * Function used to print the board

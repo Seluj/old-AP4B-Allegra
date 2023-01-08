@@ -4,13 +4,20 @@ import java.awt.event.ActionListener;
 
 class Exit implements ActionListener {
 
+    // ---------------------- ATTRIBUTES ---------------------- //
+
     // Exit the program and close the window
     private final JFrame j;
 
-    // Constructor
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
+
     public Exit(JFrame j) {
         this.j = j;
     }
+
+
+    // ---------------------- OVERRIDE Function ---------------------- //
 
     @Override
     public void actionPerformed(ActionEvent e) {

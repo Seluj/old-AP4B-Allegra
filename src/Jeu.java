@@ -6,7 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
-    // Variables
+
+
+    // ---------------------- ATTRIBUTES ---------------------- //
 
     private int colonne;    // Column of the grid
     private int ligne;      // Raw of the grid
@@ -33,6 +35,8 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     private int redJPanel;             // Panel for the help button
 
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
 
     /**
      * Build the game panel
@@ -100,6 +104,9 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         // Update the main panel
         revalidate();
     }
+
+
+    // ---------------------- OTHER Function ---------------------- //
 
     /**
      * Initialize the table of cards for each player
@@ -307,6 +314,9 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         redButton.paintComponent(redButton.getGraphics());
     }
 
+
+    // ---------------------- OVERRIDE Function ---------------------- //
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // Modify the frame size and location to fit the menu
@@ -356,6 +366,14 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        frame.setSize(jeuWidth, jeuHeight);
+    }
+
+
+    // ---------------------- Subclass ---------------------- //
+
     /**
      * A subclass of JLabel to add a method to paint the component and resize the image
      */
@@ -377,9 +395,5 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             if (this.imageIcon != null)
                 g.drawImage(imageIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
-    }
-
-    public void paintComponent(Graphics g) {
-        frame.setSize(jeuWidth, jeuHeight);
     }
 }

@@ -5,9 +5,14 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JPanel implements Base, ActionListener {
 
+    // ---------------------- ATTRIBUTES ---------------------- //
+
     private JComboBox comboBoxNombreJoueurs;
     private JButton buttonStart;
     private int joueurs;
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
 
     public Menu() {
         setName("menu");
@@ -35,6 +40,9 @@ public class Menu extends JPanel implements Base, ActionListener {
         add(labelBackground);
     }
 
+
+    // ---------------------- ACCESS Function ---------------------- //
+
     public int getJoueurs(){
         return joueurs;
     }
@@ -47,6 +55,9 @@ public class Menu extends JPanel implements Base, ActionListener {
         this.joueurs = Integer.parseInt(choixJ);
         System.out.println("Nombre de joueurs choisis:"+joueurs);
     }
+
+
+    // ---------------------- OVERRIDE Function ---------------------- //
 
     @Override
     public void actionPerformed(ActionEvent e) {

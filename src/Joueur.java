@@ -1,9 +1,14 @@
 public class Joueur {
 
-    // Attributes
+
+    // ---------------------- ATTRIBUTES ---------------------- //
+
     private final String nom;       // Player's name
     private int score;              // Player's score [number of rounds won]
     private final Plateau plateau;  // Player's board
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
 
     /**
      * Constuctor with a given name and a draw pile to make his game
@@ -15,6 +20,43 @@ public class Joueur {
         this.score = 0;
         this.plateau = new Plateau(p);
     }
+
+
+    // ---------------------- ACCESS Function ---------------------- //
+
+    /**
+     * Access to the name of the player
+     * @return name of the player
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * Access to the score of the player
+     * @return score of the player
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Access to the game of the player
+     * @return game of the player
+     */
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    /**
+     * Increment score of the player when he wins
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+
+    // ---------------------- OTHER Function ---------------------- //
 
     /**
      * Calculates the score of the player for that round
@@ -47,39 +89,4 @@ public class Joueur {
         }
 
     }
-
-    /**
-     * Increment score of the player when he wins
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    // ---------------------- ACCESS Function ---------------------- //
-    // All of these function will transfer data to the view part     //
-
-    /**
-     * Access to the name of the player
-     * @return name of the player
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * Access to the score of the player
-     * @return score of the player
-     */
-    public int getScore() {
-        return score;
-    }
-
-    /**
-     * Access to the game of the player
-     * @return game of the player
-     */
-    public Plateau getPlateau() {
-        return plateau;
-    }
-
 }

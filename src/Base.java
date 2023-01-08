@@ -1,7 +1,8 @@
 import javax.swing.*;
 
 public interface Base {
-    // Variables used in the game and accessible from all classes
+
+    // ---------------------- ATTRIBUTES ---------------------- //
 
     JFrame frame = new JFrame();    // The frame of the game
     JPanel cards = new JPanel();    //  a panel that uses CardLayout
@@ -14,4 +15,7 @@ public interface Base {
 
     int X = 3;                      // Number of raw of the grid for the board
     int Y = 4;                      // Number of column of the grid for the board
+
+    // ---------------------- OTHER Function ---------------------- //
+
 }

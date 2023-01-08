@@ -3,10 +3,15 @@ import java.util.Random;
 
 public class Pioche {
 
-    // Attributes
+
+    // ---------------------- ATTRIBUTES ---------------------- //
+
     private static final int total = 120;               // Total number of cards in the draw pile
     private final Carte[] cartes = new Carte[total];    // Array of cards in the draw pile
     private int index = 0;                              // Index of the next card to draw
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
 
     /**
      * Default constructor create draw pile with random card
@@ -33,6 +38,19 @@ public class Pioche {
         }
     }
 
+    // ---------------------- ACCESS Function ---------------------- //
+
+    /**
+     * Access to the current card in the draw pile
+     * @return the current card in the draw pile
+     */
+    public Carte getFirstCard() {
+        return cartes[index];
+    }
+
+
+    // ---------------------- OTHER Function ---------------------- //
+
     /**
      * Draw a card from the draw pile
      * @return the card drawn
@@ -46,10 +64,6 @@ public class Pioche {
 
         // Return the card
         return returned;
-    }
-
-    public Carte getFirstCard() {
-        return cartes[index];
     }
 
     /**
@@ -81,7 +95,6 @@ public class Pioche {
         }
         return true;
     }
-
 
     /**
      * Count the number of card of the type passed by parameter
@@ -127,6 +140,8 @@ public class Pioche {
         System.out.println();
     }
 
+
+    // ---------------------- OVERRIDE Function ---------------------- //
 
     /**
      * Print the draw pile

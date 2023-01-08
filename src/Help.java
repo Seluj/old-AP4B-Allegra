@@ -4,6 +4,15 @@ import java.awt.event.ActionListener;
 
 class Help implements ActionListener {
 
+
+    // ---------------------- ATTRIBUTES ---------------------- //
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
+
+
+    // ---------------------- OVERRIDE Function ---------------------- //
+
     // Display the help window
     @Override
     public void actionPerformed(ActionEvent e) {

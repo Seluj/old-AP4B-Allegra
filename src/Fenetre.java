@@ -4,6 +4,11 @@ import java.awt.*;
 
 public class Fenetre implements Base {
 
+    // ---------------------- ATTRIBUTES ---------------------- //
+
+
+    // ---------------------- CONSTRUCTOR ---------------------- //
+
     /**
      * Build the window and panels to cardLayout
      * @param panels the panels to add to the cardLayout. Warning: Panels must have a name
@@ -32,6 +37,9 @@ public class Fenetre implements Base {
         // Finally, display the window
         frame.setVisible(true);
     }
+
+
+    // ---------------------- OTHER Function ---------------------- //
 
     /**
      * Add a new panel to the cardLayout
