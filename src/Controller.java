@@ -11,8 +11,8 @@ public class Controller implements Base{
     private final Fenetre f = new Fenetre(menu);    // Window which will contain the menu and after initialization of the game, the game
     private Pioche p;                               // Draw pile
     private Defausse d;                             // Discard pile
-    private Joueur[] listJoueurs;
-    private int joueur;                                     // The current players who's turn it is
+    private Joueur[] listJoueurs;                   // List of all the players
+    private int joueur;                                     // The current players who's turn it is to play
     //Int to keep track of if a player has turned all of his cards, therefore initialising the last round
     private int cartesRet = 6; //we initialise on 6 because the last player number is 5
     //Int indicating the winner of the game [you must win 3 rounds to win the game]
@@ -62,7 +62,7 @@ public class Controller implements Base{
                         player = joueur + 1;
                     }
                 }
-
+                //Switch depending on the user's choice of action
                 switch (jeu.getAction()) {
                     case 1 -> actPioche(player);
                     case 2 -> actDef(player);
@@ -77,12 +77,13 @@ public class Controller implements Base{
                     listJoueurs[joueur].cartesAllign(listJoueurs[joueur+1]);
                     joueur++;
                 }
+                //We then reset certain attributes for the next player's turn
                 jeu.setAction(0);
                 jeu.printDialog("");
                 jeu.eraseRevealedDrawPile();
                 jeu.setCardSelected(new int[]{-1, -1});
             }
-           setScores(joueur);
+            setScores(joueur);
             for (int j = 0; j < nbJoueurs; j++) {
                 if (j == nbJoueurs-1) {
                     System.out.println("Score joueur " + j + " = " + listJoueurs[j].roundScore(listJoueurs[0]));
@@ -92,9 +93,6 @@ public class Controller implements Base{
             }
         }
     }
-
-
-    // ---------------------- ACCESS Methods ---------------------- //
 
 
     // ---------------------- OTHER Methods ---------------------- //
@@ -136,7 +134,7 @@ public class Controller implements Base{
     }
 
     /**
-     * The user chooses to pick a card from the "Défausse" and exchange it with one of his cards
+     * The user chooses to pick a card from the "Défausse" and exchanges it with one of his cards
      */
     private void actDef(int player) {
         Carte aEnlever = listJoueurs[player].getPlateau().getCarte(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
@@ -166,7 +164,7 @@ public class Controller implements Base{
     }
 
     /**
-     * Compares everyone's number of credits at the end of the round of the game to award the victory to the correct player
+     * Compares everyone's number of credits at the end of the round of the game to find which player has the lowest score
      */
     private int playerLowestScore() {
         int joueur_min = 6, score=1000, score_temp;
@@ -202,8 +200,8 @@ public class Controller implements Base{
     }
 
     /**
-     *
-     * @param joueurFirstFinish
+     * The function sets the score at the end of the round. If the player who turned over all his cards first has the highest score, his score for that round is doubled
+     * @param joueurFirstFinish the first player to finish turning his cards
      */
     private void setScores(int joueurFirstFinish) {
         int playerScoreMin = playerLowestScore();
