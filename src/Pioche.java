@@ -69,7 +69,7 @@ public class Pioche {
     /**
      * Check if there are enought card of the card passed by parameter
      * @param carte the card to check
-     * @param fin
+     * @param fin index of the last card in the draw pile
      * @return true if the card can be inserted and false if not
      */
     private boolean check_carte(int carte, int fin) {

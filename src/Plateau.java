@@ -87,7 +87,6 @@ public class Plateau implements Base {
     }
 
     /**
-     * EXEPTION A GERER !!!!!!!!!
      * @param x x coordinate of the card
      * @param y y coordinate of the card
      * @return true if the card has been revealed

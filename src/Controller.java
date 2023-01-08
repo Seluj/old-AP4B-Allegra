@@ -184,8 +184,8 @@ public class Controller implements Base{
     }
 
     /**
-     *
-     * @return
+     * Indicate if there is a player that has the same number of points as the player with the least
+     * @return True if yes, False if not
      */
     private boolean shareLowestScore() {
         int playerScoreMin = playerLowestScore();
