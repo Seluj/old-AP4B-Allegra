@@ -112,8 +112,6 @@ public class Controller implements Base{
             joueur_min = nbJoueurs-1;
         }
 
-        System.out.println("Le gagnant de la manche est : " + listJoueurs[joueur_min]);
-
         return joueur_min;
     }
 
