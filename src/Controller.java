@@ -108,21 +108,19 @@ public class Controller implements Base{
      * Compares everyone's number of credits at the end of the round of the game to award the victory to the correct player
      */
     private int playerLowestScore(){
-        int joueur_min = 0, score;
+        int joueur_min = 6, score=1000, score_temp;
 
-        for(int i=0; i<nbJoueurs-1; i++){
-            score = listJoueurs[i].roundScore(listJoueurs[i+1]);
-
-            if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) < score) {
+        for (int i=0; i < nbJoueurs; i++){
+            if (i == nbJoueurs-1) {
+                score_temp = listJoueurs[i].roundScore(listJoueurs[0]);
+            } else {
+                score_temp = listJoueurs[i].roundScore(listJoueurs[i+1]);
+            }
+            if (score > score_temp){
+                score = score_temp;
                 joueur_min = i;
             }
         }
-        score = listJoueurs[nbJoueurs-1].roundScore(listJoueurs[0]);
-
-        if(listJoueurs[joueur_min].roundScore(listJoueurs[joueur_min+1]) < score) {
-            joueur_min = nbJoueurs-1;
-        }
-
         return joueur_min;
     }
 
