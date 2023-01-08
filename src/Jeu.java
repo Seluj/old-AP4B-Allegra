@@ -43,17 +43,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
      */
     public Jeu(int nombreJoueur) {
 
-        // Set basic information about the main panel
-        setName("jeu");                             // Set the name of the main panel, it will be used to switch between panels
-        setLayout(new GridLayout(ligne, colonne));  // Set the layout of the main panel to a grid layout
-
-        // Set Size of the panel and location
-        frame.setSize(jeuWidth, jeuHeight);
-        frame.setLocationRelativeTo(null);
-
-        // Generate the table to store Icon to be displayed of each player
-        display_cards = new MyJLabel[nombreJoueur][12];
-
         // Initialize the column and raw of the grid of the panel
         switch (nombreJoueur) {
             case 2, 3, 4 -> {
@@ -66,6 +55,17 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             }
             default -> System.out.println("Nombre de joueurs invalide");
         }
+
+        // Set basic information about the main panel
+        setName("jeu");                             // Set the name of the main panel, it will be used to switch between panels
+        setLayout(new GridLayout(ligne, colonne));  // Set the layout of the main panel to a grid layout
+
+        // Set Size of the panel and location
+        frame.setSize(jeuWidth, jeuHeight);
+        frame.setLocationRelativeTo(null);
+
+        // Generate the table to store Icon to be displayed of each player
+        display_cards = new MyJLabel[nombreJoueur][12];
 
         // Initialize the number of panel in the grid
         // Number of panel in the grid
