@@ -36,12 +36,13 @@ public class Controller implements Base{
         jeu.printDiscardPile(d);
         jeu.printRevealedDrawPile(p);
         jeu.printHiddenDrawPile();
+        jeu.printRedButton();
 
         //Loop until the 3 rounds are over
         for (int i = 0; i < 3; i++){
-            // We start the round so we start with the first player
+            // We start the round, so we start with the first player
             int joueur = 0;
-            //Each players gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
+            //Each player gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
             while(!listJoueurs[joueur].getPlateau().allRetourner()){
                 printGame(joueur);
                 //
@@ -115,6 +116,7 @@ public class Controller implements Base{
 
         return joueur_min;
     }
+
     private boolean shareLowestScore(){
         int playerScoreMin = playerLowestScore();
         int scoreMin = listJoueurs[playerScoreMin].getScore();
@@ -126,6 +128,7 @@ public class Controller implements Base{
         }
         return false;
     }
+
     private void setScores(int joueurFirstFinish){
         int playerScoreMin = playerLowestScore();
 
@@ -137,7 +140,5 @@ public class Controller implements Base{
         if(playerScoreMin != joueurFirstFinish || shareLowestScore()){
             listJoueurs[joueurFirstFinish].setScore(2*listJoueurs[joueurFirstFinish].getScore());
         }
-
     }
-
 }
