@@ -1,12 +1,15 @@
 import java.awt.*;
 
 public class Controller implements Base{
-    private int nbJoueurs;
-    private final Menu menu = new Menu();
-    private Jeu jeu;
-    private final Fenetre f = new Fenetre(menu);
-    private Pioche p;
-    private Defausse d;
+
+    // Variables
+
+    private int nbJoueurs;                          // Number of players
+    private final Menu menu = new Menu();           // Menu Panel
+    private Jeu jeu;                                // Game Panel not initialized yet because we don't know the number of players yet
+    private final Fenetre f = new Fenetre(menu);    // Window which will contain the menu and after initialization of the game, the game
+    private Pioche p;                               // Draw pile
+    private Defausse d;                             // Discard pile
     private Joueur[] listJoueurs;
     //Int to keep track of if a player has turned all of his cards, therefore initialising the last round
     private int cartesRet = 6; //we initialise on 6 because the last player number is 5
@@ -33,10 +36,7 @@ public class Controller implements Base{
         }
 
         System.out.println(p);
-        jeu.printDiscardPile(d);
-        jeu.printRevealedDrawPile(p);
-        jeu.printHiddenDrawPile();
-        jeu.printRedButton();
+
 
         //Loop until the 3 rounds are over
         for (int i = 0; i < 3; i++){
@@ -67,8 +67,10 @@ public class Controller implements Base{
         listJoueurs = new Joueur[nbJoueurs];
         //Initialising each player
         for (int i=0; i < nbJoueurs; i++){
-            listJoueurs[i] = new Joueur("j"+i,p);
+            listJoueurs[i] = new Joueur("j" + i, p);
         }
+
+        //Initialized the game and added it to the window
         jeu = new Jeu(nbJoueurs);
         f.addPanel(jeu);
     }
@@ -78,11 +80,20 @@ public class Controller implements Base{
      * @param j Indicates which player is the first to play
      */
     private void printGame(int j){
+
+        // We display the cards of each player, starting with the active player
         for (int i=0; i < nbJoueurs; i++) {
             //System.out.println("boucle printGame"+i);
             jeu.printCard(this.listJoueurs[j%nbJoueurs].getPlateau(), i);
             j++;
         }
+
+        // Print all things needed for the player to play
+        jeu.printDiscardPile(d);
+        jeu.printHiddenDrawPile();
+        jeu.printRedButton();
+
+        // Update the Panel
         jeu.revalidate();
     }
 
