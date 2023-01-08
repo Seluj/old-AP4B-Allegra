@@ -41,14 +41,14 @@ public class Menu extends JPanel implements Base, ActionListener {
     }
 
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     public int getJoueurs(){
         return joueurs;
     }
 
     /**
-     * Function used to set the number of players selected
+     * Method used to set the number of players selected
      */
     public void setNbJoueurs(){
         String choixJ = (String)comboBoxNombreJoueurs.getSelectedItem();
@@ -57,7 +57,7 @@ public class Menu extends JPanel implements Base, ActionListener {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -17,7 +17,7 @@ class Exit implements ActionListener {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -106,7 +106,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
      * Initialize the table of cards for each player
@@ -164,7 +164,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         panels[redJPanel].add(redButton);
     }
 
-    // ------- Function to initialize all variables needed to know where to display players' cards and other things ------- //
+    // ------- Methods to initialize all variables needed to know where to display players' cards and other things ------- //
 
     /**
      * Initialize the table to know which panel is for which player with 2 players
@@ -264,7 +264,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
 
 
-    // ------- Function to display the cards ------- //
+    // ------- Methods to display the cards ------- //
 
 
     /**
@@ -315,7 +315,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -11,7 +11,7 @@ class Help implements ActionListener {
     // ---------------------- CONSTRUCTOR ---------------------- //
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     // Display the help window
     @Override

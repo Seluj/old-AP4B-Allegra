@@ -16,6 +16,6 @@ public interface Base {
     int X = 3;                      // Number of raw of the grid for the board
     int Y = 4;                      // Number of column of the grid for the board
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
 }

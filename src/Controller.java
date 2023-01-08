@@ -61,13 +61,13 @@ public class Controller implements Base{
     }
 
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
-     * Function used to initialise the players and the game once the user has selected the number of players
+     * Method used to initialise the players and the game once the user has selected the number of players
      */
     private void init() {
         p = new Pioche();

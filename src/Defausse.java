@@ -12,7 +12,7 @@ public class Defausse {
     }
 
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     // Get the card on the discard pile
     public Carte getDefausse() {

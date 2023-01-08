@@ -22,7 +22,7 @@ public class Joueur {
     }
 
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     /**
      * Access to the name of the player
@@ -56,7 +56,7 @@ public class Joueur {
     }
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
      * Calculates the score of the player for that round

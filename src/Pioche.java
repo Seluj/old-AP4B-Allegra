@@ -38,7 +38,7 @@ public class Pioche {
         }
     }
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     /**
      * Access to the current card in the draw pile
@@ -49,7 +49,7 @@ public class Pioche {
     }
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
      * Draw a card from the draw pile
@@ -141,7 +141,7 @@ public class Pioche {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     /**
      * Print the draw pile

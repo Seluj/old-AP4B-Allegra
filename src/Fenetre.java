@@ -39,7 +39,7 @@ public class Fenetre implements Base {
     }
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
      * Add a new panel to the cardLayout

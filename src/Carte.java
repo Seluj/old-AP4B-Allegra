@@ -18,7 +18,7 @@ public class Carte {
     }
 
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     // Get the number of credits on the card
     public int getCredits() {
@@ -31,7 +31,7 @@ public class Carte {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     @Override
     public String toString() {

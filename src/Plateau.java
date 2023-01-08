@@ -25,7 +25,7 @@ public class Plateau implements Base {
         }
     }
 
-    // ---------------------- ACCESS Function ---------------------- //
+    // ---------------------- ACCESS Methods ---------------------- //
 
     /**
      * Access to the state of the card at the position passed by parameter
@@ -48,10 +48,10 @@ public class Plateau implements Base {
     }
 
 
-    // ---------------------- OTHER Function ---------------------- //
+    // ---------------------- OTHER Methods ---------------------- //
 
     /**
-     * Function used to reveal card [if said card hasn't been revealed or removed yet
+     * Method used to reveal card [if said card hasn't been revealed or removed yet
      * @param x x coordinate of the card
      * @param y y coordinate of the card
      */
@@ -73,7 +73,7 @@ public class Plateau implements Base {
     }
 
     /**
-     * Function used to know if all the cards have been revealed or removed
+     * Method used to know if all the cards have been revealed or removed
      * @return a boolean 0 -> if they're not all revealed // 1 -> if they are all revealed
      */
     public boolean allRetourner(){
@@ -93,10 +93,10 @@ public class Plateau implements Base {
     }
 
 
-    // ---------------------- OVERRIDE Function ---------------------- //
+    // ---------------------- OVERRIDE Methods ---------------------- //
 
     /**
-     * Function used to print the board
+     * Method used to print the board
      * @return a string containing the board
      */
     @Override
