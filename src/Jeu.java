@@ -391,7 +391,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         hiddenDrawPile.paintComponent(hiddenDrawPile.getGraphics());
     }
 
-    public void printRevealedDrawPile(Pioche p) {
+    public void printRevealedDrawPile() {
         revealedDrawPile.setIcon(new ImageIcon("src/images/" + p.getFirstCard().getCredits() + ".png"));
         revealedDrawPile.paintComponent(revealedDrawPile.getGraphics());
     }
@@ -454,6 +454,8 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         } else if (e.getSource() == hiddenDrawPile) {
             setAction(1);
             System.out.println("draw pile clicked");
+            printDialog("Veuillez cliquer sur une de vos cartes pour l'échanger ou sur la défausse pour la défausser");
+            printRevealedDrawPile();
         } else if (e.getSource() == discardPile) {
             if (action == 1) {
                 printDialog("Veuillez cliquer sur une de vos cartes pour la retourner");

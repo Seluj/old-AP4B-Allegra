@@ -12,6 +12,7 @@ public class Controller implements Base{
     private Pioche p;                               // Draw pile
     private Defausse d;                             // Discard pile
     private Joueur[] listJoueurs;
+    private int joueur;                                     // The current players who's turn it is
     //Int to keep track of if a player has turned all of his cards, therefore initialising the last round
     private int cartesRet = 6; //we initialise on 6 because the last player number is 5
     //Int indicating the winner of the game [you must win 3 rounds to win the game]
@@ -25,8 +26,9 @@ public class Controller implements Base{
         do {
             System.out.print("");
         } while ((nbJoueurs = menu.getJoueurs()) == 0);
-        //A DEPLACER!!!! DANS LA BOUCLE CHECKWINNER
-        init();
+        //Initialized the game and added it to the window
+        jeu = new Jeu(nbJoueurs);
+        f.addPanel(jeu);
         System.out.println(p);
         //Changes JPanel to "Jeu"
         CardLayout cl = (CardLayout) (cards.getLayout());
@@ -35,24 +37,44 @@ public class Controller implements Base{
         frame.setLocationRelativeTo(null);
         int player;
 
-        System.out.println(p);
-
-
         //Loop until the 3 rounds are over
         for (int i = 0; i < 3; i++) {
             init();
             // We start the round, so we start with the first player
-            int joueur = 0;
+            joueur = 0;
             //Each player gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
             while (!listJoueurs[joueur].getPlateau().allRetourner()) {
                 jeu.setD(d);
                 jeu.setP(p);
                 printGame(joueur);
-                //
-                //We move on to the next player
+                System.out.println(listJoueurs[joueur].getPlateau());
+                while (jeu.getAction() == 0 || (jeu.getCardSelected()[0] == -1 && jeu.getCardSelected()[1] == -1)) {
+                    System.out.print("");
+                }
+
+                System.out.println("Action = " + jeu.getAction() + " | CardSelected = " + jeu.getCardSelected()[0] + " " + jeu.getCardSelected()[1]);
+                if (jeu.getplayerCard()) {
+                    player = joueur;
+                } else {
+                    if (joueur == nbJoueurs-1) {
+                        player = 0;
+                    } else {
+                        player = joueur + 1;
+                    }
+                }
+
+                switch (jeu.getAction()) {
+                    case 1 -> actPioche(player);
+                    case 2 -> actDef(player);
+                    case 3 -> actPiocheDef(player);
+                    default -> System.out.println("Erreur");
+                }
+                //We move on to the next player but also check if there are three identical alligned cards
                 if (joueur == nbJoueurs-1) {
+                    listJoueurs[joueur].cartesAllign(listJoueurs[0]);
                     joueur = 0;
                 } else {
+                    listJoueurs[joueur].cartesAllign(listJoueurs[joueur+1]);
                     joueur++;
                 }
                 jeu.setAction(0);
@@ -60,7 +82,14 @@ public class Controller implements Base{
                 jeu.eraseRevealedDrawPile();
                 jeu.setCardSelected(new int[]{-1, -1});
             }
-           // setScores(joueur);
+           setScores(joueur);
+            for (int j = 0; j < nbJoueurs; j++) {
+                if (j == nbJoueurs-1) {
+                    System.out.println("Score joueur " + j + " = " + listJoueurs[j].roundScore(listJoueurs[0]));
+                } else {
+                    System.out.println("Score joueur " + j + " = " + listJoueurs[j].roundScore(listJoueurs[j+1]));
+                }
+            }
         }
     }
 
@@ -82,10 +111,6 @@ public class Controller implements Base{
         for (int i = 0; i < nbJoueurs; i++) {
             listJoueurs[i] = new Joueur("j" + i, p);
         }
-
-        //Initialized the game and added it to the window
-        jeu = new Jeu(nbJoueurs);
-        f.addPanel(jeu);
     }
 
     /**
@@ -102,7 +127,7 @@ public class Controller implements Base{
         }
 
         // Print all things needed for the player to play
-        jeu.printDiscardPile(d);
+        jeu.printDiscardPile();
         jeu.printHiddenDrawPile();
         jeu.printRedButton();
 
@@ -111,10 +136,33 @@ public class Controller implements Base{
     }
 
     /**
-     * The user chooses to pick a card from the "Défausse"
+     * The user chooses to pick a card from the "Défausse" and exchange it with one of his cards
      */
-    private void actDefausse() {
+    private void actDef(int player) {
+        Carte aEnlever = listJoueurs[player].getPlateau().getCarte(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+        Carte aAjouter = d.getDefausse();
+        d.setDefausse(aEnlever);
+        listJoueurs[player].getPlateau().setCarte(aAjouter, jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+        listJoueurs[player].getPlateau().retourner(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+    }
 
+    /**
+     * The user reveals the card from the draw pile but then discards it. Therefore revealing a card from his "plateau"
+     */
+    private void actPiocheDef(int player){
+        d.setDefausse(p.piocher_carte());
+        listJoueurs[player].getPlateau().retourner(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+    }
+
+    /**
+     * The user reveals the card from the draw pile and then exchanges it with one of his cards
+     */
+    private void actPioche(int player){
+        Carte aEnlever = listJoueurs[player].getPlateau().getCarte(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+        d.setDefausse(aEnlever);
+        Carte aAjouter = p.piocher_carte();
+        listJoueurs[player].getPlateau().setCarte(aAjouter, jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
+        listJoueurs[player].getPlateau().retourner(jeu.getCardSelected()[0], jeu.getCardSelected()[1]);
     }
 
     /**
@@ -137,6 +185,10 @@ public class Controller implements Base{
         return joueur_min;
     }
 
+    /**
+     *
+     * @return
+     */
     private boolean shareLowestScore() {
         int playerScoreMin = playerLowestScore();
         int scoreMin = listJoueurs[playerScoreMin].getScore();
@@ -149,6 +201,10 @@ public class Controller implements Base{
         return false;
     }
 
+    /**
+     *
+     * @param joueurFirstFinish
+     */
     private void setScores(int joueurFirstFinish) {
         int playerScoreMin = playerLowestScore();
 

@@ -83,10 +83,43 @@ public class Joueur {
     /**
      * Checks if there are three aligned identical cards, if it is the case they are removed from the player's "plateau"
      */
-    public void cartesAllign() {
-        for (int i =0; i < 4; i++){
-            plateau.getCartes(i,2);
+    public void cartesAllign(Joueur joueur_suivant) {
+        //We check the columns first
+        for (int i = 0; i < 4; i++){
+            if (plateau.isRetourner(0,i) && plateau.isRetourner(1, i) && plateau.isRetourner(2, i)){
+                if (plateau.getCartes(0, i) == plateau.getCartes(1, i) && plateau.getCartes(1, i) == plateau.getCartes(2, i)){
+                    plateau.retirer(0, i);
+                    plateau.retirer(1, i);
+                    plateau.retirer(2, i);
+                    System.out.println("Alligned cards removed");
+                }
+            }
         }
 
+        //We check the rows next [the ones with shared card with the other user]
+        for (int i = 0; i < 3; i++){
+            if (joueur_suivant.plateau.isRetourner(i,3) && plateau.isRetourner(i, 0) && plateau.isRetourner(i, 1)) {
+                if (joueur_suivant.plateau.getCartes(i,3) == plateau.getCartes(i, 0) && plateau.getCartes(i, 0) == plateau.getCartes(i, 1)){
+                    joueur_suivant.plateau.retirer(i,3);
+                    plateau.retirer(i, 0);
+                    plateau.retirer(i, 1);
+                    System.out.println("Alligned cards removed");
+                }
+            }
+        }
+
+        //We check the other rows
+        for (int i = 0; i < 2; i++){
+            for (int j = 0; j < 3; j++) {
+                if (plateau.isRetourner(j, i) && plateau.isRetourner(j, i+1) && plateau.isRetourner(j, i+2)){
+                    if (plateau.getCartes(j, i) == plateau.getCartes(j, i+1) && plateau.getCartes(j, i+1) == plateau.getCartes(j, i+2)){
+                        plateau.retirer(j, i);
+                        plateau.retirer(j, i+1);
+                        plateau.retirer(j, i+2);
+                        System.out.println("Alligned cards removed");
+                    }
+                }
+            }
+        }
     }
 }

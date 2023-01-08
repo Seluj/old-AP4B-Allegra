@@ -41,7 +41,7 @@ public class Plateau implements Base {
      * Access to the card at the position passed by parameter
      * @param x X position of the card
      * @param y Y position of the card
-     * @return the card at the position
+     * @return the card's credits at the position
      */
     public int getCartes(int x, int y) {
         return cartes[x][y].getCredits();
@@ -75,6 +75,16 @@ public class Plateau implements Base {
         }
     }
 
+    /**
+     * Method used to remove a card
+     * @param x x coordinate of the card
+     * @param y y coordinate of the card
+     */
+    public void retirer(int x, int y) {
+        if (!this.isRetirer(x, y)) {
+            cache[x][y] = 2;
+        }
+    }
 
     /**
      * EXEPTION A GERER !!!!!!!!!
@@ -84,6 +94,16 @@ public class Plateau implements Base {
      */
     protected boolean isRetourner(int x, int y) {
         return cache[x][y] == 1 || cache[x][y] == 2;
+    }
+
+    /**
+     * Method used to check if a user has removed a card
+     * @param x x coordinate of the card
+     * @param y y coordinate of the card
+     * @return value of the table cache at the position x, y
+     */
+    protected boolean isRetirer(int x, int y) {
+        return cache[x][y] == 2;
     }
 
     /**
