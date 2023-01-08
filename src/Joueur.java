@@ -6,25 +6,6 @@ public class Joueur {
     private final Plateau plateau;  // Player's board
 
     /**
-     * Default constructor
-     */
-    public Joueur() {
-        this.nom = "Joueur";
-        this.score = 0;
-        this.plateau = new Plateau();
-    }
-
-    /**
-     * Constructor with name of the player
-     * @param nom name of the player
-     */
-    public Joueur(String nom) {
-        this.nom = nom;
-        this.score = 0;
-        this.plateau = new Plateau();
-    }
-
-    /**
      * Constuctor with a given name and a draw pile to make his game
      * @param nom name of the player
      * @param p Draw pile
@@ -58,7 +39,7 @@ public class Joueur {
     }
 
     /**
-     * Checks if there are three alligned identical cards, if it is the case they are removed from the player's "plateau"
+     * Checks if there are three aligned identical cards, if it is the case they are removed from the player's "plateau"
      */
     public void cartesAllign() {
         for (int i =0; i < 4; i++){

@@ -6,18 +6,6 @@ public class Plateau implements Base {
     private final int[][] cache = new int[X][Y];        // 0 -> hidden / 1 -> revealed / 2 -> no card
 
     /**
-     * Default constructor create a board with no card
-     */
-    public Plateau() {
-        for (int i = 0; i < X; i++) {
-            for (int j = 0; j < Y; j++) {
-                cartes[i][j] = new Carte();
-                cache[i][j] = 0;
-            }
-        }
-    }
-
-    /**
      * Constructor create a board with the cards passed by parameter
      * @param p The draw pile to take the cards from
      */

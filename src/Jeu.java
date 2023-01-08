@@ -17,11 +17,10 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     private final MyJLabel[][] display_cards;
 
 
-    private MyJLabel hiddenDrawPile;
-    private MyJLabel revealedDrawPile;
-    private MyJLabel discardPile;
-
-    private MyJLabel redButton;
+    private MyJLabel hiddenDrawPile;        // Hidden draw pile Panel
+    private MyJLabel revealedDrawPile;      // Revealed draw pile Panel
+    private MyJLabel discardPile;           // Discard pile Panel
+    private MyJLabel redButton;             // Red button Panel
 
     // Table of JPanel to fil the grid.
     // The grid is 5 raw and 5 column.
@@ -32,7 +31,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
 
     private int drawAndDiscardJPanel;   // Panel for the draw and discard pile
 
-    private int helpJPanel;             // Panel for the help button
+    private int redJPanel;             // Panel for the help button
 
 
     /**
@@ -40,8 +39,9 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
      */
     public Jeu(int nombreJoueur) {
 
-        // Set basic information about the panel
-        setName("jeu");         // Set the name of the panel, it will be used to switch between panels
+        // Set basic information about the main panel
+        setName("jeu");                             // Set the name of the main panel, it will be used to switch between panels
+        setLayout(new GridLayout(ligne, colonne));  // Set the layout of the main panel to a grid layout
 
         // Set Size of the panel and location
         frame.setSize(jeuWidth, jeuHeight);
@@ -63,18 +63,18 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             default -> System.out.println("Nombre de joueurs invalide");
         }
 
-        // Initialize the number of panel in the grid minus the menu button
+        // Initialize the number of panel in the grid
         // Number of panel in the grid
         int nbPanel = (colonne * ligne);
 
-        // Initialize the table of JPanel and set the layout of the panel to GridLayout
-        this.panels = new JPanel[nbPanel];
-        setLayout(new GridLayout(ligne, colonne));
+        // Initialize the table of JPanel who will fill the main grid
+        panels = new JPanel[nbPanel];
 
-        // Initialize the panels and set the layout of the panel to GridLayout with 3 raw and 4 column
+        // Initialize the panels and set the layout of each panel to GridLayout with 3 raw and 4 column.
+        // Sometimes we need to change the layout of the panel to display something else
         for (int i = 0; i < nbPanel; i++) {
-            this.panels[i] = new JPanel();
-            this.panels[i].setLayout(new GridLayout(3, 4, 5, 5));
+            panels[i] = new JPanel();
+            panels[i].setLayout(new GridLayout(3, 4, 5, 5));
         }
 
         // Initialize the table to know which panel is for which player with a given number of player
@@ -92,14 +92,18 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         initDrawAndDiscardPile();
         initRedButton();
 
-        // Add the panels to the grid
+        // Finally, add the all panels to the grid of the main panel
         for (int i = 0; i < nbPanel; i++) {
             add(panels[i]);
         }
 
+        // Update the main panel
         revalidate();
     }
 
+    /**
+     * Initialize the table of cards for each player
+     */
     private void initPanelPlayerCard() {
         // For each player and each card of the player initialize the display of the card, add it to the panel and set the listener
         for (int i = 0; i < playerJPanels.length; i++) {
@@ -111,8 +115,16 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Initialize the draw and discard pile
+     */
     private void initDrawAndDiscardPile() {
+
+        // Change the layout of the panel to a grid layout with 3 raw and 5 column
         panels[drawAndDiscardJPanel].setLayout(new GridLayout(3, 5, 5, 5));
+
+        // Fill the panel with empty JLabel
+        // except the 6th, 7th, and 8th JLabel for hidden draw pile, revealed draw pile and discard pile
         for (int i = 0; i < 15; i++) {
             if (i == 6) {
                 hiddenDrawPile = new MyJLabel();
@@ -132,12 +144,17 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Initialize the red button
+     * The red button is used to know the column which belong to the active player
+     */
     private void initRedButton() {
+        // Fill the panel with empty JLabel except the last JLabel for the red button
         for (int i = 0; i < 11; i++) {
-            panels[helpJPanel].add(new MyJLabel());
+            panels[redJPanel].add(new MyJLabel());
         }
         redButton = new MyJLabel();
-        panels[helpJPanel].add(redButton);
+        panels[redJPanel].add(redButton);
     }
 
     // ------- Function to initialize all variables needed to know where to display players' cards and other things ------- //
@@ -150,7 +167,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[0] = 13;      // Player 1
         playerJPanels[1] = 11;      // Player 2
         drawAndDiscardJPanel = 12;  // Draw and discard pile
-        helpJPanel = 6;             // Help button
+        redJPanel = 6;              // Help button
     }
 
     /**
@@ -158,11 +175,11 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
      */
     private void troisJoueurs() {
         playerJPanels = new int[3];
-        playerJPanels[0] = 18;          // Player 1
-        playerJPanels[1] = 16;          // Player 2
-        playerJPanels[2] = 7;           // Player 3
-        drawAndDiscardJPanel = 12;      // Draw and discard pile
-        helpJPanel = 11;                // Help button
+        playerJPanels[0] = 18;      // Player 1
+        playerJPanels[1] = 16;      // Player 2
+        playerJPanels[2] = 7;       // Player 3
+        drawAndDiscardJPanel = 12;  // Draw and discard pile
+        redJPanel = 11;             // Help button
     }
 
     /**
@@ -175,7 +192,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[2] = 6;       // Player 3
         playerJPanels[3] = 8;       // Player 4
         drawAndDiscardJPanel = 12;  // Draw and discard pile
-        helpJPanel = 11;            // Help button
+        redJPanel = 11;             // Help button
     }
 
     /**
@@ -189,7 +206,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[3] = 10;      // Player 4
         playerJPanels[4] = 12;      // Player 5
         drawAndDiscardJPanel = 17;  // Draw and discard pile
-        helpJPanel = 16;            // Help button
+        redJPanel = 16;             // Help button
     }
 
     /**
@@ -204,7 +221,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[4] = 12;      // Player 5
         playerJPanels[5] = 26;      // Player 6
         drawAndDiscardJPanel = 17;  // Draw and discard pile
-        helpJPanel = 15;            // Help button
+        redJPanel = 15;             // Help button
     }
 
 
@@ -237,6 +254,10 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     public int toInterface(int x, int y) {
         return y + (x * 3 + x);
     }
+
+
+
+    // ------- Function to display the cards ------- //
 
 
     /**
@@ -285,7 +306,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         redButton.setIcon(new ImageIcon("src/images/redButton.png"));
         redButton.paintComponent(redButton.getGraphics());
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
