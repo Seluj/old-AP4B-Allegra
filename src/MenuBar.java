@@ -20,7 +20,7 @@ public class MenuBar extends JMenuBar {
         menuBar.add(helpMenu);
 
         // Create the different menu items
-        JMenuItem saveItem = new JMenuItem("Save");
+        //JMenuItem saveItem = new JMenuItem("Save");
         JMenuItem exitItem = new JMenuItem("Exit");
         JMenuItem helpItem = new JMenuItem("Help");
 
@@ -29,7 +29,7 @@ public class MenuBar extends JMenuBar {
         helpItem.addActionListener(new Help());
 
         // Add the menu items to the menu
-        fileMenu.add(saveItem);
+        //fileMenu.add(saveItem);
         fileMenu.add(exitItem);
         helpMenu.add(helpItem);
 

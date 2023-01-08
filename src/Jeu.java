@@ -19,21 +19,38 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     private final MyJLabel[][] display_cards;
 
 
-    private MyJLabel hiddenDrawPile;        // Hidden draw pile Panel
-    private MyJLabel revealedDrawPile;      // Revealed draw pile Panel
-    private MyJLabel discardPile;           // Discard pile Panel
-    private MyJLabel redButton;             // Red button Panel
+    private MyJLabel hiddenDrawPile;            // Hidden draw pile Panel
+    private MyJLabel revealedDrawPile;          // Revealed draw pile Panel
+    private MyJLabel discardPile;               // Discard pile Panel
+    private MyJLabel redButton;                 // Red button Panel
+    private JTextPane messageBox;                  // Message box Panel
 
     // Table of JPanel to fil the grid.
     // The grid is 5 raw and 5 column.
     // 24 JPanels for game et 1 case for the menu button
     private final JPanel[] panels;
 
-    private int[] playerJPanels;        // Table to know which panel is for which player
+    private int[] playerJPanels;                // Table to know which panel is for which player
 
-    private int drawAndDiscardJPanel;   // Panel for the draw and discard pile
+    private int drawAndDiscardJPanel;           // Panel for the draw and discard pile
 
-    private int redJPanel;             // Panel for the help button
+    private int redJPanel;                      // Panel for the help button
+
+    private int messagePanel;                   // Panel for the message
+
+
+    Defausse d;                                 // Discard pile
+
+    Pioche p;                                   // Draw pile
+
+    private int action;                         // Action to do  (0 = nothing, 1 = draw, 2 = discard, 3 = reveal, 4 = )
+
+    private int[] cardSelected = new int[2];    // Table to know which card is selected
+    
+    private boolean playerCard;                 // 1 -> the selected card belongs to the player / 0 -> it belongs to another player
+
+    boolean drawPileRevealed = false;           // Boolean to know if the draw pile is revealed or not
+
 
 
     // ---------------------- CONSTRUCTOR ---------------------- //
@@ -95,16 +112,77 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         initPanelPlayerCard();
         initDrawAndDiscardPile();
         initRedButton();
+        initMessagePanel();
 
         // Finally, add the all panels to the grid of the main panel
         for (int i = 0; i < nbPanel; i++) {
             add(panels[i]);
         }
 
+        cardSelected[0] = -1;
+        cardSelected[1] = -1;
+
         // Update the main panel
         revalidate();
     }
 
+
+    // ---------------------- ACCESS Methods ---------------------- //
+
+    /**
+     * Get the selected card
+     * @return Table of selected card
+     */
+    public int[] getCardSelected() {
+        return cardSelected;
+    }
+
+    /**
+     * Set the selected card
+     * @param cardSelected Table of selected card
+     */
+    public void setCardSelected(int[] cardSelected) {
+        this.cardSelected = cardSelected;
+    }
+
+    /**
+     * get the action to do
+     * @return Action to do
+     */
+    public int getAction() {
+        return action;
+    }
+
+    /**
+     * Set the action to do
+     * @param action Action to do
+     */
+    public void setAction(int action) {
+        this.action = action;
+    }
+
+    /**
+     * Set the draw pile
+     * @param d Draw pile
+     */
+    public void setD(Defausse d) {
+        this.d = d;
+    }
+
+    /**
+     * Set the discard pile
+     * @param p Discard pile
+     */
+    public void setP(Pioche p) {
+        this.p = p;
+    }
+
+    /**
+     *
+     */
+    public boolean getplayerCard(){
+        return playerCard;
+    }
 
     // ---------------------- OTHER Methods ---------------------- //
 
@@ -139,7 +217,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
                 panels[drawAndDiscardJPanel].add(hiddenDrawPile);
             } else if (i == 7) {
                 revealedDrawPile = new MyJLabel();
-                revealedDrawPile.addMouseListener(this);
                 panels[drawAndDiscardJPanel].add(revealedDrawPile);
             } else if (i == 8) {
                 discardPile = new MyJLabel();
@@ -164,6 +241,11 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         panels[redJPanel].add(redButton);
     }
 
+    private void initMessagePanel() {
+        messageBox = new JTextPane();
+        panels[messagePanel].add(messageBox);
+    }
+
     // ------- Methods to initialize all variables needed to know where to display players' cards and other things ------- //
 
     /**
@@ -175,6 +257,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[1] = 11;      // Player 2
         drawAndDiscardJPanel = 12;  // Draw and discard pile
         redJPanel = 6;              // Help button
+        messagePanel = 2;           // Message panel
     }
 
     /**
@@ -187,6 +270,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[2] = 7;       // Player 3
         drawAndDiscardJPanel = 12;  // Draw and discard pile
         redJPanel = 11;             // Help button
+        messagePanel = 2;           // Message panel
     }
 
     /**
@@ -200,6 +284,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[3] = 8;       // Player 4
         drawAndDiscardJPanel = 12;  // Draw and discard pile
         redJPanel = 11;             // Help button
+        messagePanel = 2;           // Message panel
     }
 
     /**
@@ -214,6 +299,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[4] = 12;      // Player 5
         drawAndDiscardJPanel = 17;  // Draw and discard pile
         redJPanel = 16;             // Help button
+        messagePanel = 3;           // Message panel
     }
 
     /**
@@ -229,6 +315,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         playerJPanels[5] = 26;      // Player 6
         drawAndDiscardJPanel = 17;  // Draw and discard pile
         redJPanel = 15;             // Help button
+        messagePanel = 3;           // Message panel
     }
 
 
@@ -241,7 +328,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         int[] tab = new int[2];
 
         for (int i = 0; i < y; i++) {
-            tab[1] ++;
+            tab[1]++;
             if (tab[1] == Y) {
                 tab[1] = 0;
                 tab[0] ++;
@@ -294,7 +381,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         }
     }
 
-    public void printDiscardPile(Defausse d) {
+    public void printDiscardPile() {
         discardPile.setIcon(new ImageIcon("src/images/" + d.getDefausse().getCredits() + ".png"));
         discardPile.paintComponent(discardPile.getGraphics());
     }
@@ -309,9 +396,24 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         revealedDrawPile.paintComponent(revealedDrawPile.getGraphics());
     }
 
+    public void eraseRevealedDrawPile() {
+        revealedDrawPile.setIcon(new ImageIcon("src/images/nothing.png"));
+        revealedDrawPile.paintComponent(revealedDrawPile.getGraphics());
+    }
+
     public void printRedButton() {
         redButton.setIcon(new ImageIcon("src/images/redButton.png"));
         redButton.paintComponent(redButton.getGraphics());
+    }
+
+    public void printDialog(String message) {
+        /*
+        JFrame jFrame = new JFrame();
+        JOptionPane.showMessageDialog(jFrame, message);
+
+         */
+        messageBox.setText(message);
+        panels[messagePanel].validate();
     }
 
 
@@ -329,20 +431,38 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         System.out.println("click");
         if (e.getSource() != hiddenDrawPile && e.getSource() != discardPile && e.getSource() != revealedDrawPile) {
-            for (int i = 0; i < display_cards.length; i++) {
-                for (int j = 0; j < display_cards[i].length; j++) {
-                    if (e.getSource() == display_cards[i][j]) {
-                        System.out.println("i = " + i + " j = " + j + " clicked");
+            if (action == 1 || action == 2 || action == 3) {
+                for (int j = 0; j < display_cards[0].length; j++) {
+                    if (e.getSource() == display_cards[0][j]) {
+                        System.out.println("i = " + 0 + " j = " + j + " clicked");
                         System.out.println("X = " + toTable(j)[0] + " Y = " + toTable(j)[1]);
+                        playerCard = true;
+                        setCardSelected(toTable(j));
+                    }
+                }
+                for (int i = 0; i < display_cards[1].length; i++) {
+                    if (e.getSource() == display_cards[1][i]) {
+                        System.out.println("i = " + 1 + " j = " + i + " clicked");
+                        System.out.println("X = " + toTable(i)[0] + " Y = " + toTable(i)[1]);
+                        if (i == 3 || i == 7 || i == 11) {
+                            playerCard = false;
+                            setCardSelected(toTable(i));
+                        }
                     }
                 }
             }
         } else if (e.getSource() == hiddenDrawPile) {
+            setAction(1);
             System.out.println("draw pile clicked");
         } else if (e.getSource() == discardPile) {
-            System.out.println("discard pile clicked");
-        } else if (e.getSource() == revealedDrawPile) {
-            System.out.println("revealed draw pile clicked");
+            if (action == 1) {
+                printDialog("Veuillez cliquer sur une de vos cartes pour la retourner");
+                setAction(3);
+            } else if (action == 0 && d.getDefausse().getCredits() != -2) {
+                System.out.println("discard pile clicked");
+                setAction(2);
+                printDialog("Veuillez cliquer sur une de vos cartes à échanger");
+            }
         }
     }
 
@@ -378,22 +498,36 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
      * A subclass of JLabel to add a method to paint the component and resize the image
      */
     static class MyJLabel extends JLabel {
+
+
+        // ---------------------- Attributes ---------------------- //
+
         ImageIcon imageIcon;
+
+
+        // ---------------------- Constructor ---------------------- //
 
         public MyJLabel() {
             super();
             this.imageIcon = null;
         }
 
+
+        // ---------------------- ACCESS Methods ---------------------- //
+
         public void setIcon(ImageIcon imageIcon) {
             this.imageIcon = imageIcon;
         }
 
+
+        // ---------------------- OVERRIDE Methods ---------------------- //
+
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            if (this.imageIcon != null)
+            if (this.imageIcon != null) {
                 g.drawImage(imageIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
         }
     }
 }

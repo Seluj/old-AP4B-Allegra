@@ -107,8 +107,9 @@ public class Pioche {
 
         // Count the number of card of this type
         for (int i = index; i < fin; i++) {
-            if (carte == cartes[i].getCredits())
+            if (carte == cartes[i].getCredits()) {
                 nb++;
+            }
         }
 
         // Return the number of card
@@ -131,8 +132,9 @@ public class Pioche {
             str.append('[');
             for (int i = index; i < total; i++) {
                 str.append(cartes[i]);
-                if ((i+1) != total)
+                if ((i+1) != total) {
                     str.append(" ,");
+                }
             }
             str.append(']');
             System.out.print(str);

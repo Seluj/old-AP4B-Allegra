@@ -47,6 +47,20 @@ public class Plateau implements Base {
         return cartes[x][y].getCredits();
     }
 
+    /**
+     * Returns the card depending on its position [the name needs to be changes]
+     * @param x X position of the card
+     * @param y Y position of the card
+     * @return the card at this specific position
+     */
+    public Carte getCarte(int x, int y) {
+        return cartes[x][y];
+    }
+
+    public void setCarte(Carte newCard, int x, int y) {
+        cartes[x][y] = newCard;
+    }
+
 
     // ---------------------- OTHER Methods ---------------------- //
 
@@ -76,12 +90,12 @@ public class Plateau implements Base {
      * Method used to know if all the cards have been revealed or removed
      * @return a boolean 0 -> if they're not all revealed // 1 -> if they are all revealed
      */
-    public boolean allRetourner(){
+    public boolean allRetourner() {
         int i = 0, j = 0;
         boolean notTurned = false;
         while (i < X && !notTurned) {
-            while (j < Y && !notTurned){
-                if (cache[i][j] == 0){
+            while (j < Y && !notTurned) {
+                if (cache[i][j] == 0) {
                     notTurned = true;
                 }
                 j++;
@@ -104,10 +118,11 @@ public class Plateau implements Base {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < X; i++) {
             for (int j = 0; j < Y; j++) {
-                if (isRetourner(i, j))
+                //if (isRetourner(i, j)) {
                     str.append(" ").append(cartes[i][j]).append(" ");
-                else
+                /*} else {
                     str.append(" - ");
+                }*/
             }
             str.append("\n");
         }

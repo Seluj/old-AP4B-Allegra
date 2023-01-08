@@ -26,13 +26,13 @@ class Help implements ActionListener {
         JLabel jLabel = new JLabel(new ImageIcon("src\\Images\\rule.png"));
 
         // Set the size of the JLabel
-        jLabel.setBounds(0,0,599,727);
+        jLabel.setBounds(0, 0, 599, 727);
 
         // Add the JLabel to the JDialog
         jDialog.getContentPane().add(jLabel);
 
         // Set the size of the JDialog
-        jDialog.setSize(800,800);
+        jDialog.setSize(800, 800);
 
         // Set the location of the JDialog
         jDialog.setAlwaysOnTop(true);

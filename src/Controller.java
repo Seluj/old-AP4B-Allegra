@@ -33,20 +33,20 @@ public class Controller implements Base{
         cl.show(cards, "jeu");
         frame.setSize(jeuWidth, jeuHeight);
         frame.setLocationRelativeTo(null);
-
-        for (int i=0; i<nbJoueurs-1;i++) {
-            System.out.println("Score joueur " + i + " = " + listJoueurs[i].roundScore(listJoueurs[i+1]));
-        }
+        int player;
 
         System.out.println(p);
 
 
         //Loop until the 3 rounds are over
         for (int i = 0; i < 3; i++) {
+            init();
             // We start the round, so we start with the first player
             int joueur = 0;
             //Each player gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
-            while(!listJoueurs[joueur].getPlateau().allRetourner()) {
+            while (!listJoueurs[joueur].getPlateau().allRetourner()) {
+                jeu.setD(d);
+                jeu.setP(p);
                 printGame(joueur);
                 //
                 //We move on to the next player
@@ -55,6 +55,10 @@ public class Controller implements Base{
                 } else {
                     joueur++;
                 }
+                jeu.setAction(0);
+                jeu.printDialog("");
+                jeu.eraseRevealedDrawPile();
+                jeu.setCardSelected(new int[]{-1, -1});
             }
            // setScores(joueur);
         }
@@ -75,7 +79,7 @@ public class Controller implements Base{
         //Allocate list size
         listJoueurs = new Joueur[nbJoueurs];
         //Initialising each player
-        for (int i=0; i < nbJoueurs; i++) {
+        for (int i = 0; i < nbJoueurs; i++) {
             listJoueurs[i] = new Joueur("j" + i, p);
         }
 
@@ -91,7 +95,7 @@ public class Controller implements Base{
     private void printGame(int j) {
 
         // We display the cards of each player, starting with the active player
-        for (int i=0; i < nbJoueurs; i++) {
+        for (int i = 0; i < nbJoueurs; i++) {
             //System.out.println("boucle printGame"+i);
             jeu.printCard(this.listJoueurs[j%nbJoueurs].getPlateau(), i);
             j++;
@@ -119,8 +123,8 @@ public class Controller implements Base{
     private int playerLowestScore() {
         int joueur_min = 6, score=1000, score_temp;
 
-        for (int i=0; i < nbJoueurs; i++) {
-            if (i == nbJoueurs-1) {
+        for (int i = 0; i < nbJoueurs; i++) {
+            if (i == (nbJoueurs-1)) {
                 score_temp = listJoueurs[i].roundScore(listJoueurs[0]);
             } else {
                 score_temp = listJoueurs[i].roundScore(listJoueurs[i+1]);
@@ -137,7 +141,7 @@ public class Controller implements Base{
         int playerScoreMin = playerLowestScore();
         int scoreMin = listJoueurs[playerScoreMin].getScore();
 
-        for(int i=0; i<nbJoueurs; i++){
+        for (int i = 0; i < nbJoueurs; i++){
             if((listJoueurs[i].getScore() == scoreMin) && (playerScoreMin != i)){
                 return true;
             }
@@ -148,7 +152,7 @@ public class Controller implements Base{
     private void setScores(int joueurFirstFinish) {
         int playerScoreMin = playerLowestScore();
 
-        for (int i=0; i < (nbJoueurs-1); i++) {
+        for (int i = 0; i < (nbJoueurs-1); i++) {
             listJoueurs[i].setScore(listJoueurs[i].roundScore(listJoueurs[i+1]));
         }
         listJoueurs[nbJoueurs-1].setScore(listJoueurs[nbJoueurs-1].roundScore(listJoueurs[0]));
