@@ -74,7 +74,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
         // Initialize the panels and set the layout of the panel to GridLayout with 3 raw and 4 column
         for (int i = 0; i < nbPanel; i++) {
             this.panels[i] = new JPanel();
-            this.panels[i].setLayout(new GridLayout(3,4));
+            this.panels[i].setLayout(new GridLayout(3, 4, 5, 5));
         }
 
         // Initialize the table to know which panel is for which player with a given number of player
@@ -112,7 +112,7 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
     private void initDrawAndDiscardPile() {
-        panels[drawAndDiscardJPanel].setLayout(new GridLayout(3,5));
+        panels[drawAndDiscardJPanel].setLayout(new GridLayout(3, 5, 5, 5));
         for (int i = 0; i < 15; i++) {
             if (i == 6) {
                 hiddenDrawPile = new MyJLabel();
@@ -133,7 +133,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
     private void initRedButton() {
-        panels[helpJPanel].setLayout(new GridLayout(3,4));
         for (int i = 0; i < 11; i++) {
             panels[helpJPanel].add(new MyJLabel());
         }
