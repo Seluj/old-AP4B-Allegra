@@ -23,7 +23,7 @@ class Help implements ActionListener {
         JDialog jDialog = new JDialog();
 
         // Create a label to display the help message with a picture
-        JLabel jLabel = new JLabel(new ImageIcon("src\\Images\\rule.png"));
+        JLabel jLabel = new JLabel(new ImageIcon("Images\\rule.png"));
 
         // Set the size of the JLabel
         jLabel.setBounds(0, 0, 599, 727);

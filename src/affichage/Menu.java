@@ -20,7 +20,7 @@ public class Menu extends JPanel implements Base, ActionListener {
         frame.setLocationRelativeTo(null);
         setLayout(null);
 
-        JLabel labelNombreJoueur = new JLabel(new ImageIcon("src\\Images\\login\\nb_joueur.png"));
+        JLabel labelNombreJoueur = new JLabel(new ImageIcon("Images\\Login\\nb_joueur.png"));
         labelNombreJoueur.setBounds(50, 195, 100, 28);
         add(labelNombreJoueur);
 
@@ -35,7 +35,7 @@ public class Menu extends JPanel implements Base, ActionListener {
         buttonStart.addActionListener(this);
         add(buttonStart);
 
-        JLabel labelBackground = new JLabel(new ImageIcon("src\\Images\\login\\backgroun.jpg"));
+        JLabel labelBackground = new JLabel(new ImageIcon("Images\\Login\\backgroun.jpg"));
         labelBackground.setBounds(0, 0, 400, 514);
         add(labelBackground);
     }

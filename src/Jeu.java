@@ -49,8 +49,6 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     
     private boolean playerCard;                 // 1 -> the selected card belongs to the player / 0 -> it belongs to another player
 
-    boolean drawPileRevealed = false;           // Boolean to know if the draw pile is revealed or not
-
 
 
     // ---------------------- CONSTRUCTOR ---------------------- //
@@ -364,15 +362,15 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
             for (int j = 0; j < Y; j++) {
                 // If the card is hidden display the back of the card
                 if (p.getCache(i, j) == 0) {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\back.png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("images\\Cards\\back.png"));
 
                 // If the card is visible display the front of the card
                 } else if (p.getCache(i, j) == 1) {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src/images/" + p.getCartes(i, j) + ".png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("images/Cards/" + p.getCartes(i, j) + ".png"));
 
                 // If the card is removed display a blank card
                 } else {
-                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("src\\images\\blank.png"));
+                    display_cards[joueur][toInterface(i, j)].setIcon(new ImageIcon("images\\blank.png"));
                 }
 
                 // Then display the card
@@ -382,27 +380,27 @@ public class Jeu extends JPanel implements Base, ActionListener, MouseListener {
     }
 
     public void printDiscardPile() {
-        discardPile.setIcon(new ImageIcon("src/images/" + d.getDefausse().getCredits() + ".png"));
+        discardPile.setIcon(new ImageIcon("images/Cards/" + d.getDefausse().getCredits() + ".png"));
         discardPile.paintComponent(discardPile.getGraphics());
     }
 
     public void printHiddenDrawPile() {
-        hiddenDrawPile.setIcon(new ImageIcon("src/images/back.png"));
+        hiddenDrawPile.setIcon(new ImageIcon("images/Cards/back.png"));
         hiddenDrawPile.paintComponent(hiddenDrawPile.getGraphics());
     }
 
     public void printRevealedDrawPile() {
-        revealedDrawPile.setIcon(new ImageIcon("src/images/" + p.getFirstCard().getCredits() + ".png"));
+        revealedDrawPile.setIcon(new ImageIcon("images/Cards/" + p.getFirstCard().getCredits() + ".png"));
         revealedDrawPile.paintComponent(revealedDrawPile.getGraphics());
     }
 
     public void eraseRevealedDrawPile() {
-        revealedDrawPile.setIcon(new ImageIcon("src/images/nothing.png"));
+        revealedDrawPile.setIcon(new ImageIcon("images/nothing.png"));
         revealedDrawPile.paintComponent(revealedDrawPile.getGraphics());
     }
 
     public void printRedButton() {
-        redButton.setIcon(new ImageIcon("src/images/redButton.png"));
+        redButton.setIcon(new ImageIcon("images/redButton.png"));
         redButton.paintComponent(redButton.getGraphics());
     }
 
