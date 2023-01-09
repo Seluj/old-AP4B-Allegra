@@ -1,3 +1,5 @@
+package affichage;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ class Help implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Log the event
-        System.out.println("Help button pressed");
+        System.out.println("affichage.Help button pressed");
 
         // Create the help window as a JDialog
         JDialog jDialog = new JDialog();

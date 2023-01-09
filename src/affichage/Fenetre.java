@@ -1,3 +1,5 @@
+package affichage;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -22,7 +24,7 @@ public class Fenetre implements Base {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(menuWidth, menuHeight);
 
-        // Add the Menu bar
+        // Add the affichage.Menu bar
         frame.getContentPane().add(BorderLayout.NORTH, new MenuBar(frame));
 
         // Create the cardLayout

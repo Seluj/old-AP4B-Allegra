@@ -1,19 +1,22 @@
+import affichage.Base;
+import affichage.Fenetre;
+import affichage.Menu;
+
+import corps.*;
+
 import java.awt.*;
 
-public class Controller implements Base{
+public class Controller implements Base {
 
 
     // ---------------------- ATTRIBUTES ---------------------- //
 
     private int nbJoueurs;                          // Number of players
-    private final Menu menu = new Menu();           // Menu Panel
-    private Jeu jeu;                                // Game Panel not initialized yet because we don't know the number of players yet
-    private final Fenetre f = new Fenetre(menu);    // Window which will contain the menu and after initialization of the game, the game
+    private final affichage.Menu menu = new Menu();           // affichage.Menu Panel
+    private final Jeu jeu;                                // Game Panel not initialized yet because we don't know the number of players yet
     private Pioche p;                               // Draw pile
     private Defausse d;                             // Discard pile
     private Joueur[] listJoueurs;                   // List of all the players
-    private int joueur;                                     // The current players who's turn it is to play
-    //Int to keep track of if a player has turned all of his cards, therefore initialising the last round
     private int cartesRet = 6; //we initialise on 6 because the last player number is 5
     //Int indicating the winner of the game [you must win 3 rounds to win the game]
     private int winner = 6; //we initialise on 6 because the last player number is 5
@@ -28,6 +31,8 @@ public class Controller implements Base{
         } while ((nbJoueurs = menu.getJoueurs()) == 0);
         //Initialized the game and added it to the window
         jeu = new Jeu(nbJoueurs);
+        // Window which will contain the menu and after initialization of the game, the game
+        Fenetre f = new Fenetre(menu);
         f.addPanel(jeu);
         System.out.println(p);
         //Changes JPanel to "Jeu"
@@ -41,7 +46,8 @@ public class Controller implements Base{
         for (int i = 0; i < 3; i++) {
             init();
             // We start the round, so we start with the first player
-            joueur = 0;
+            // The current players who's turn it is to play
+            int joueur = 0;
             //Each player gets a turn to play.We loop until the round of the game is over [one player has turned all his cards]
             while (!listJoueurs[joueur].getPlateau().allRetourner()) {
                 jeu.setD(d);
@@ -74,7 +80,7 @@ public class Controller implements Base{
                     listJoueurs[joueur].cartesAllign(listJoueurs[0]);
                     joueur = 0;
                 } else {
-                    listJoueurs[joueur].cartesAllign(listJoueurs[joueur+1]);
+                    listJoueurs[joueur].cartesAllign(listJoueurs[joueur +1]);
                     joueur++;
                 }
                 //We then reset certain attributes for the next player's turn

@@ -1,3 +1,5 @@
+package corps;
+
 public class Carte {
 
     // ---------------------- ATTRIBUTES ---------------------- //
@@ -23,11 +25,6 @@ public class Carte {
     // Get the number of credits on the card
     public int getCredits() {
         return credits;
-    }
-
-    // Set the number of credits on the card
-    public void setCredits(int credits) {
-        this.credits = credits;
     }
 
 

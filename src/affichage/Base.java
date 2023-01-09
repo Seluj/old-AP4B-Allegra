@@ -1,3 +1,5 @@
+package affichage;
+
 import javax.swing.*;
 
 public interface Base {

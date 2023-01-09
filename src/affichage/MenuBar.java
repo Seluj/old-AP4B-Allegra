@@ -1,3 +1,5 @@
+package affichage;
+
 import javax.swing.*;
 
 public class MenuBar extends JMenuBar {

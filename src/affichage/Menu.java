@@ -1,5 +1,6 @@
+package affichage;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,8 +8,7 @@ public class Menu extends JPanel implements Base, ActionListener {
 
     // ---------------------- ATTRIBUTES ---------------------- //
 
-    private JComboBox comboBoxNombreJoueurs;
-    private JButton buttonStart;
+    private final JComboBox comboBoxNombreJoueurs;
     private int joueurs;
 
 
@@ -29,7 +29,7 @@ public class Menu extends JPanel implements Base, ActionListener {
         comboBoxNombreJoueurs.setBounds(200, 195, 150, 32);
         add(comboBoxNombreJoueurs);
 
-        buttonStart = new JButton("Commencer");
+        JButton buttonStart = new JButton("Commencer");
         buttonStart.setSize(100, 32);
         buttonStart.setLocation((menuWidth/2)-50, 250);
         buttonStart.addActionListener(this);

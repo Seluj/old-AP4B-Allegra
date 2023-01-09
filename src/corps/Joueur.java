@@ -1,3 +1,5 @@
+package corps;
+
 public class Joueur {
 
 

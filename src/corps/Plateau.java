@@ -1,3 +1,6 @@
+package corps;
+
+import affichage.Base;
 
 public class Plateau implements Base {
 

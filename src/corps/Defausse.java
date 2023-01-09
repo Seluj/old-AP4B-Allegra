@@ -1,8 +1,10 @@
+package corps;
+
 public class Defausse {
 
     // ---------------------- ATTRIBUTES ---------------------- //
 
-    private Carte defausse = new Carte();
+    private Carte defausse;
 
 
     // ---------------------- CONSTRUCTOR ---------------------- //
